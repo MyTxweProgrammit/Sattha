@@ -1,0 +1,5230 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SATTHA — Mindful Chanting &amp; Sound Studio</title>
+  <meta name="description" content="SATTHA พื้นที่สำหรับรับฟังบทสวด ผสานเสียงบรรยากาศ และสนทนาเรื่องความเชื่อด้วยมุมมองที่เปิดกว้าง">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+Thai:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #090B0F;
+      --bg-secondary: #10141A;
+      --surface-card: #151A21;
+      --surface-elevated: #1B222B;
+      --text-main: #F2F4F6;
+      --text-secondary: #A4ADB8;
+      --text-muted: #707B88;
+      --accent-main: #A9C7C9;
+      --accent-secondary: #A99CCB;
+      --highlight-warm: #C9B99B;
+      --border-subtle: rgba(220, 230, 240, 0.10);
+      --border-strong: rgba(220, 230, 240, 0.20);
+      --danger: #D98A8A;
+      --danger-bg: rgba(217, 138, 138, 0.10);
+      --success: #9BC4B0;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 20px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-10: 40px;
+      --space-12: 48px;
+      --font-sans: 'Noto Sans Thai', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --max-width: 1140px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--text-main);
+      background-color: var(--bg-main);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    button, input, select, textarea {
+      font: inherit;
+      color: inherit;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--accent-main);
+      outline-offset: 2px;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 var(--space-4);
+    }
+
+    @media (min-width: 768px) {
+      .container {
+        padding: 0 var(--space-6);
+      }
+    }
+
+    /* Navigation */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(9, 11, 15, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 60px;
+      gap: var(--space-4);
+    }
+
+    .wordmark {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: none;
+      border: none;
+      padding: var(--space-1) 0;
+      cursor: pointer;
+      color: var(--text-main);
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .wordmark-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent-main);
+      opacity: 0.85;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: var(--space-1);
+    }
+
+    @media (min-width: 768px) {
+      .nav-links {
+        display: flex;
+      }
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 13.5px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: color 0.18s ease, background-color 0.18s ease;
+    }
+
+    .nav-btn:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--surface-card);
+      border: 1px solid var(--border-subtle);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
+      white-space: nowrap;
+    }
+
+    .status-pill .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--highlight-warm);
+    }
+
+    .status-pill[data-state="connected"] {
+      color: var(--accent-main);
+      border-color: rgba(169, 199, 201, 0.3);
+      background: rgba(169, 199, 201, 0.06);
+    }
+
+    .status-pill[data-state="connected"] .dot {
+      background: var(--success);
+      box-shadow: 0 0 8px rgba(155, 196, 176, 0.45);
+    }
+
+    .status-pill[data-state="offline"] {
+      color: var(--danger);
+      border-color: rgba(217, 138, 138, 0.3);
+      background: var(--danger-bg);
+    }
+
+    .status-pill[data-state="offline"] .dot {
+      background: var(--danger);
+    }
+
+    .mobile-menu-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-subtle);
+      background: var(--surface-card);
+      color: var(--text-main);
+      cursor: pointer;
+    }
+
+    @media (min-width: 768px) {
+      .mobile-menu-toggle {
+        display: none;
+      }
+    }
+
+    .mobile-nav-panel {
+      display: none;
+      border-top: 1px solid var(--border-subtle);
+      background: var(--bg-secondary);
+      padding: var(--space-3) var(--space-4);
+    }
+
+    .mobile-nav-panel.open {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+
+    @media (min-width: 768px) {
+      .mobile-nav-panel.open {
+        display: none;
+      }
+    }
+
+    .mobile-nav-panel .nav-btn {
+      text-align: left;
+      padding: 10px 12px;
+      font-size: 14px;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      padding: var(--space-8) 0 var(--space-6);
+      border-bottom: 1px solid var(--border-subtle);
+      overflow: hidden;
+    }
+
+    @media (min-width: 768px) {
+      .hero {
+        padding: var(--space-10) 0 var(--space-8);
+      }
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+      align-items: center;
+    }
+
+    @media (min-width: 860px) {
+      .hero-grid {
+        grid-template-columns: 1.25fr 0.75fr;
+        gap: var(--space-8);
+      }
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 11.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent-main);
+      margin-bottom: var(--space-2);
+      font-weight: 500;
+    }
+
+    .hero h1 {
+      margin: 0 0 var(--space-3);
+      font-size: clamp(26px, 4vw, 38px);
+      font-weight: 500;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+      color: var(--text-main);
+    }
+
+    .hero-lead {
+      margin: 0 0 var(--space-6);
+      color: var(--text-secondary);
+      font-size: clamp(15px, 1.8vw, 16.5px);
+      max-width: 560px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      padding: 10px 18px;
+      min-height: 42px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 500;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: background-color 0.16s ease, border-color 0.16s ease, color 0.16s ease, opacity 0.16s ease;
+      text-decoration: none;
+    }
+
+    .btn:disabled {
+      opacity: 0.42;
+      cursor: not-allowed;
+    }
+
+    .btn-primary {
+      background: var(--accent-main);
+      color: #090B0F;
+      font-weight: 600;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: #bdd6d8;
+    }
+
+    .btn-secondary {
+      background: var(--surface-card);
+      color: var(--text-main);
+      border-color: var(--border-strong);
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      background: var(--surface-elevated);
+      border-color: rgba(220, 230, 240, 0.32);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-secondary);
+      border-color: var(--border-subtle);
+    }
+
+    .btn-ghost:hover:not(:disabled) {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .btn-danger {
+      background: var(--danger-bg);
+      color: var(--danger);
+      border-color: rgba(217, 138, 138, 0.32);
+    }
+
+    .btn-danger:hover:not(:disabled) {
+      background: rgba(217, 138, 138, 0.18);
+    }
+
+    .btn-sm {
+      min-height: 34px;
+      padding: 6px 12px;
+      font-size: 12.5px;
+    }
+
+    /* Hero Sound Orb */
+    .hero-visual-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 190px;
+      perspective: 800px;
+    }
+
+    .hero-radial-light {
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(169, 199, 201, 0.11) 0%, rgba(169, 156, 203, 0.05) 45%, transparent 72%);
+      pointer-events: none;
+    }
+
+    .sound-orb {
+      position: relative;
+      width: 176px;
+      height: 176px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform-style: preserve-3d;
+      transition: transform 0.35s ease-out;
+    }
+
+    .orb-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .orb-ring-1 {
+      width: 176px;
+      height: 176px;
+      border-color: rgba(169, 199, 201, 0.16);
+      transform: translateZ(8px);
+    }
+
+    .orb-ring-2 {
+      width: 132px;
+      height: 132px;
+      border-color: rgba(169, 156, 203, 0.18);
+      transform: translateZ(18px);
+    }
+
+    .orb-ring-3 {
+      width: 88px;
+      height: 88px;
+      background: rgba(21, 26, 33, 0.72);
+      border-color: rgba(201, 185, 155, 0.24);
+      transform: translateZ(28px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .orb-wave-svg {
+      width: 58px;
+      height: 28px;
+      stroke: var(--accent-main);
+      stroke-width: 1.5;
+      fill: none;
+      opacity: 0.85;
+    }
+
+    /* Section Shell */
+    .section-block {
+      padding: var(--space-8) 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    @media (min-width: 768px) {
+      .section-block {
+        padding: var(--space-10) 0;
+      }
+    }
+
+    .section-header {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+      margin-bottom: var(--space-6);
+    }
+
+    @media (min-width: 768px) {
+      .section-header-row {
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: space-between;
+      }
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: clamp(20px, 2.5vw, 24px);
+      font-weight: 500;
+      color: var(--text-main);
+    }
+
+    .section-sub {
+      margin: 0;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    /* Studio Workspace */
+    .studio-workspace {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .studio-topbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+      padding: var(--space-3) var(--space-4);
+      background: var(--surface-card);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    @media (min-width: 768px) {
+      .studio-topbar {
+        padding: var(--space-3) var(--space-6);
+      }
+    }
+
+    .studio-tabs {
+      display: inline-flex;
+      background: var(--bg-main);
+      padding: 3px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-subtle);
+      gap: 3px;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      padding: 7px 14px;
+      border-radius: 4px;
+      font-size: 13.5px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+
+    .tab-btn[aria-selected="true"] {
+      background: var(--surface-elevated);
+      color: var(--text-main);
+    }
+
+    .studio-master-bar {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      flex-wrap: wrap;
+    }
+
+    .studio-status-text {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Studio Grid */
+    .studio-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 960px) {
+      .studio-grid {
+        grid-template-columns: 1.15fr 0.85fr;
+      }
+    }
+
+    .studio-col-main {
+      padding: var(--space-5) var(--space-4);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    @media (min-width: 768px) {
+      .studio-col-main {
+        padding: var(--space-6);
+      }
+    }
+
+    @media (min-width: 960px) {
+      .studio-col-main {
+        border-bottom: none;
+        border-right: 1px solid var(--border-subtle);
+      }
+    }
+
+    .studio-col-side {
+      padding: var(--space-5) var(--space-4);
+      background: rgba(21, 26, 33, 0.45);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
+    }
+
+    @media (min-width: 768px) {
+      .studio-col-side {
+        padding: var(--space-6);
+      }
+    }
+
+    .tab-panel[hidden] {
+      display: none;
+    }
+
+    /* Audio Comparison Stage (Left: Original vs Right: New) */
+    .compare-stage {
+      padding: var(--space-4);
+      background: rgba(9, 11, 15, 0.55);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    @media (min-width: 768px) {
+      .compare-stage {
+        padding: var(--space-5) var(--space-6);
+      }
+    }
+
+    .compare-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+      margin-bottom: var(--space-4);
+    }
+
+    .compare-title-group {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      flex-wrap: wrap;
+    }
+
+    .compare-heading {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+
+    .compare-state-pill {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background: var(--surface-card);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .compare-mode-bar {
+      display: inline-flex;
+      flex-wrap: wrap;
+      background: var(--bg-main);
+      padding: 3px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-subtle);
+      gap: 3px;
+    }
+
+    .compare-mode-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-secondary);
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 12.5px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .compare-mode-btn:hover {
+      color: var(--text-main);
+    }
+
+    .compare-mode-btn[aria-checked="true"] {
+      background: var(--surface-elevated);
+      color: var(--accent-main);
+      border-color: rgba(169, 199, 201, 0.24);
+    }
+
+    .compare-split-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-3);
+    }
+
+    @media (min-width: 640px) {
+      .compare-split-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-4);
+      }
+    }
+
+    .compare-pane {
+      background: var(--surface-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .compare-pane.pane-new {
+      border-color: rgba(169, 199, 201, 0.20);
+    }
+
+    .compare-pane-head {
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 6px;
+      background: rgba(21, 26, 33, 0.7);
+    }
+
+    .compare-pane-title {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-main);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pane-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--text-secondary);
+      flex-shrink: 0;
+    }
+
+    .pane-new .pane-dot {
+      background: var(--accent-main);
+    }
+
+    .compare-pane-sub {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .compare-canvas-wrap {
+      position: relative;
+      background: var(--bg-main);
+      height: 172px;
+      width: 100%;
+    }
+
+    .compare-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* Dropzone */
+    .dropzone {
+      border: 1px dashed rgba(220, 230, 240, 0.22);
+      border-radius: var(--radius-md);
+      background: var(--surface-card);
+      padding: var(--space-6) var(--space-4);
+      text-align: center;
+      transition: border-color 0.16s ease, background-color 0.16s ease;
+    }
+
+    .dropzone.drag-over {
+      border-color: var(--accent-main);
+      background: rgba(169, 199, 201, 0.06);
+    }
+
+    .dropzone-title {
+      margin: 0 0 var(--space-1);
+      font-size: 14.5px;
+      font-weight: 500;
+      color: var(--text-main);
+    }
+
+    .dropzone-hint {
+      margin: 0 0 var(--space-4);
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* File Metadata Bar */
+    .file-meta-card {
+      margin-top: var(--space-4);
+      padding: var(--space-3) var(--space-4);
+      background: var(--surface-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+    }
+
+    .file-name {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text-main);
+      word-break: break-all;
+    }
+
+    .file-stats {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Transport Controls */
+    .transport-panel {
+      margin-top: var(--space-4);
+      padding: var(--space-4);
+      background: var(--surface-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+    }
+
+    .seek-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      margin-bottom: var(--space-3);
+    }
+
+    .time-readout {
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-variant-numeric: tabular-nums;
+      min-width: 42px;
+    }
+
+    .time-readout.end {
+      text-align: right;
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 5px;
+      background: var(--surface-elevated);
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      cursor: pointer;
+    }
+
+    input[type="range"]:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--accent-main);
+      border: 2px solid var(--bg-main);
+      cursor: pointer;
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--accent-main);
+      border: 2px solid var(--bg-main);
+      cursor: pointer;
+    }
+
+    .transport-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+    }
+
+    .transport-left {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+    }
+
+    /* Notice / Message Banner */
+    .notice-bar {
+      margin-top: var(--space-4);
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-subtle);
+      background: var(--surface-card);
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .notice-bar[data-kind="error"] {
+      border-color: rgba(217, 138, 138, 0.35);
+      background: var(--danger-bg);
+      color: #eebbbb;
+    }
+
+    .notice-bar[data-kind="success"] {
+      border-color: rgba(155, 196, 176, 0.35);
+      background: rgba(155, 196, 176, 0.08);
+      color: #cce3d6;
+    }
+
+    /* Microphone Controls */
+    .mic-controls-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+
+    .field-label {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+
+    .device-row {
+      display: flex;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+    }
+
+    .select-input {
+      flex: 1 1 220px;
+      min-height: 40px;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-strong);
+      background: var(--bg-main);
+      color: var(--text-main);
+      font-size: 13.5px;
+    }
+
+    .mic-indicator-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+      padding-top: var(--space-2);
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .mic-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12.5px;
+      font-weight: 500;
+      padding: 5px 11px;
+      border-radius: 999px;
+      background: var(--bg-main);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+    }
+
+    .mic-badge .indicator-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--text-muted);
+    }
+
+    .mic-badge[data-active="true"] {
+      color: var(--text-main);
+      border-color: rgba(155, 196, 176, 0.45);
+      background: rgba(155, 196, 176, 0.10);
+    }
+
+    .mic-badge[data-active="true"] .indicator-dot {
+      background: var(--success);
+    }
+
+    .rec-panel {
+      margin-top: var(--space-4);
+      padding: var(--space-4);
+      background: var(--surface-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+
+    .rec-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-2);
+    }
+
+    .rec-badge {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .rec-badge[data-recording="true"] {
+      color: var(--danger);
+      font-weight: 600;
+    }
+
+    .subtle-note {
+      margin: var(--space-3) 0 0;
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* Mixer & Presets Column */
+    .panel-heading {
+      margin: 0 0 var(--space-3);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+
+    .mixer-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      padding-bottom: var(--space-4);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .slider-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .slider-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+    }
+
+    .slider-val {
+      color: var(--text-muted);
+      font-size: 12px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+      padding: 8px 12px;
+      background: var(--surface-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+    }
+
+    .switch-btn {
+      position: relative;
+      width: 44px;
+      height: 24px;
+      border-radius: 999px;
+      background: var(--bg-main);
+      border: 1px solid var(--border-strong);
+      cursor: pointer;
+      padding: 0;
+      transition: background-color 0.16s ease, border-color 0.16s ease;
+      flex-shrink: 0;
+    }
+
+    .switch-btn::after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--text-secondary);
+      transition: transform 0.16s ease, background-color 0.16s ease;
+    }
+
+    .switch-btn[aria-checked="true"] {
+      background: rgba(169, 199, 201, 0.22);
+      border-color: var(--accent-main);
+    }
+
+    .switch-btn[aria-checked="true"]::after {
+      transform: translateX(20px);
+      background: var(--accent-main);
+    }
+
+    /* Presets List */
+    .preset-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-2);
+    }
+
+    .preset-card {
+      text-align: left;
+      background: var(--surface-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      cursor: pointer;
+      transition: border-color 0.15s ease, background-color 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .preset-card:hover {
+      background: var(--surface-elevated);
+    }
+
+    .preset-card[aria-checked="true"] {
+      border-color: var(--accent-main);
+      background: rgba(169, 199, 201, 0.08);
+    }
+
+    .preset-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-2);
+    }
+
+    .preset-name {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .preset-tag {
+      font-size: 11px;
+      color: var(--accent-secondary);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .preset-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.45;
+    }
+
+    .preset-behavior-box {
+      margin-top: var(--space-3);
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-main);
+      border: 1px solid var(--border-subtle);
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    .science-note {
+      margin-top: var(--space-3);
+      padding: 10px 12px;
+      border-left: 2px solid var(--highlight-warm);
+      background: rgba(201, 185, 155, 0.05);
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    /* Resonant Breath Visual Guide */
+    .breath-guide-box {
+      margin-top: var(--space-3);
+      padding: var(--space-4);
+      border-radius: var(--radius-md);
+      background: var(--bg-main);
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .breath-guide-hidden {
+      display: none;
+    }
+
+    .breath-circle-stage {
+      width: 116px;
+      height: 116px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .breath-outer-ring {
+      position: absolute;
+      width: 108px;
+      height: 108px;
+      border-radius: 50%;
+      border: 1px dashed var(--border-strong);
+    }
+
+    .breath-cue-circle {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(169, 199, 201, 0.16);
+      border: 1.5px solid var(--accent-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      will-change: transform;
+    }
+
+    .breath-phase-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-main);
+    }
+
+    .breath-controls {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    /* AI Companion Section */
+    .chat-shell {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chat-topbar {
+      padding: var(--space-3) var(--space-4);
+      background: var(--surface-card);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+    }
+
+    @media (min-width: 768px) {
+      .chat-topbar {
+        padding: var(--space-3) var(--space-6);
+      }
+    }
+
+    .chat-mode-group {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      flex-wrap: wrap;
+    }
+
+    .mode-switch {
+      display: inline-flex;
+      background: var(--bg-main);
+      padding: 3px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .mode-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      padding: 5px 12px;
+      border-radius: 4px;
+      font-size: 12.5px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+
+    .mode-btn[aria-pressed="true"] {
+      background: var(--surface-elevated);
+      color: var(--accent-main);
+    }
+
+    /* Permanent Token Bar (Unified Minimal Tech Dark Styling) */
+    .gemini-token-bar {
+      padding: var(--space-3) var(--space-4);
+      background: linear-gradient(180deg, rgba(21, 26, 33, 0.92) 0%, rgba(16, 20, 26, 0.96) 100%);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .gemini-token-bar[hidden] {
+      display: none;
+    }
+
+    @media (min-width: 768px) {
+      .gemini-token-bar {
+        padding: var(--space-3) var(--space-6);
+      }
+    }
+
+    .token-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .token-label-group {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      margin-right: var(--space-1);
+    }
+
+    .token-label {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--accent-main);
+      white-space: nowrap;
+      letter-spacing: 0.02em;
+    }
+
+    .token-perm-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: rgba(155, 196, 176, 0.10);
+      border: 1px solid rgba(155, 196, 176, 0.30);
+      color: var(--success);
+      white-space: nowrap;
+    }
+
+    .token-perm-badge[data-custom="true"] {
+      background: rgba(169, 156, 203, 0.12);
+      border-color: rgba(169, 156, 203, 0.32);
+      color: var(--accent-secondary);
+    }
+
+    .token-perm-badge .perm-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .token-input-group {
+      flex: 1 1 260px;
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+    }
+
+    .token-input-wrap {
+      position: relative;
+      flex: 1 1 220px;
+      display: flex;
+      align-items: center;
+    }
+
+    .token-input {
+      width: 100%;
+      min-height: 36px;
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(169, 199, 201, 0.24);
+      background: var(--bg-main);
+      color: var(--text-main);
+      font-size: 13px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      letter-spacing: 0.03em;
+      transition: border-color 0.16s ease, box-shadow 0.16s ease;
+    }
+
+    .token-input:focus {
+      border-color: var(--accent-main);
+      box-shadow: 0 0 0 2px rgba(169, 199, 201, 0.12);
+      outline: none;
+    }
+
+    .token-input::placeholder {
+      color: var(--text-muted);
+      font-family: var(--font-sans);
+      letter-spacing: normal;
+    }
+
+    .token-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .token-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-2);
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+
+    .token-endpoint-tag {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 11px;
+      color: var(--text-secondary);
+      background: var(--surface-card);
+      border: 1px solid var(--border-subtle);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .prompt-chips {
+      padding: var(--space-3) var(--space-4);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      background: rgba(21, 26, 33, 0.35);
+    }
+
+    @media (min-width: 768px) {
+      .prompt-chips {
+        padding: var(--space-3) var(--space-6);
+      }
+    }
+
+    .chip-btn {
+      background: var(--surface-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      border-radius: 999px;
+      padding: 6px 13px;
+      font-size: 12.5px;
+      cursor: pointer;
+      text-align: left;
+      transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+    }
+
+    .chip-btn:hover {
+      color: var(--text-main);
+      border-color: var(--accent-secondary);
+      background: var(--surface-elevated);
+    }
+
+    .chat-messages {
+      padding: var(--space-5) var(--space-4);
+      min-height: 320px;
+      max-height: 520px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+
+    @media (min-width: 768px) {
+      .chat-messages {
+        padding: var(--space-6);
+      }
+    }
+
+    .msg-row {
+      display: flex;
+      flex-direction: column;
+      max-width: 88%;
+    }
+
+    @media (min-width: 768px) {
+      .msg-row {
+        max-width: 78%;
+      }
+    }
+
+    .msg-row.user {
+      align-self: flex-end;
+      align-items: flex-end;
+    }
+
+    .msg-row.assistant {
+      align-self: flex-start;
+      align-items: flex-start;
+    }
+
+    .msg-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .demo-tag {
+      display: inline-block;
+      padding: 1px 7px;
+      border-radius: 4px;
+      background: rgba(201, 185, 155, 0.12);
+      border: 1px solid rgba(201, 185, 155, 0.28);
+      color: var(--highlight-warm);
+      font-size: 10.5px;
+      font-weight: 500;
+    }
+
+    .msg-bubble {
+      padding: 12px 16px;
+      border-radius: var(--radius-md);
+      font-size: 14.5px;
+      line-height: 1.68;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .msg-row.user .msg-bubble {
+      background: var(--surface-elevated);
+      color: var(--text-main);
+      border-color: rgba(169, 199, 201, 0.22);
+    }
+
+    .msg-row.assistant .msg-bubble {
+      background: var(--surface-card);
+      color: var(--text-main);
+    }
+
+    .msg-bubble p {
+      margin: 0 0 10px;
+    }
+
+    .msg-bubble p:last-child {
+      margin-bottom: 0;
+    }
+
+    .msg-bubble ul {
+      margin: 6px 0 10px;
+      padding-left: 20px;
+    }
+
+    .msg-bubble li {
+      margin-bottom: 4px;
+    }
+
+    .msg-bubble strong {
+      color: var(--accent-main);
+      font-weight: 600;
+    }
+
+    .chat-error-box {
+      margin: 0 var(--space-4) var(--space-3);
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(217, 138, 138, 0.35);
+      background: var(--danger-bg);
+      color: #f0c2c2;
+      font-size: 13px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+    }
+
+    .chat-error-box[hidden] {
+      display: none;
+    }
+
+    @media (min-width: 768px) {
+      .chat-error-box {
+        margin: 0 var(--space-6) var(--space-3);
+      }
+    }
+
+    .chat-input-bar {
+      padding: var(--space-3) var(--space-4);
+      background: var(--surface-card);
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    @media (min-width: 768px) {
+      .chat-input-bar {
+        padding: var(--space-4) var(--space-6);
+      }
+    }
+
+    .chat-form-row {
+      display: flex;
+      gap: var(--space-2);
+      align-items: flex-end;
+    }
+
+    .chat-textarea {
+      flex: 1;
+      min-height: 44px;
+      max-height: 132px;
+      resize: vertical;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-strong);
+      background: var(--bg-main);
+      color: var(--text-main);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .chat-hint-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11.5px;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+      gap: var(--space-2);
+    }
+
+    /* About & Trust */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+
+    @media (min-width: 768px) {
+      .about-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .trust-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: var(--space-5);
+    }
+
+    .trust-card h3 {
+      margin: 0 0 var(--space-2);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .trust-card p {
+      margin: 0;
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    .disclaimer-banner {
+      margin-top: var(--space-6);
+      padding: var(--space-4) var(--space-5);
+      border-radius: var(--radius-md);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      font-size: 13.5px;
+      color: var(--text-secondary);
+    }
+
+    .site-footer {
+      padding: var(--space-6) 0;
+      color: var(--text-muted);
+      font-size: 12.5px;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-3);
+    }
+  </style>
+<style data-link-removed-style>a[data-link-removed],a[href*="zPythonSafez"]:not([onclick]){pointer-events:none!important;cursor:default!important;opacity:.6}</style></head>
+<body>
+
+  <!-- Navigation -->
+  <header class="site-header">
+    <div class="container nav-inner">
+      <button type="button" class="wordmark" data-scroll-to="top" aria-label="SATTHA หน้าแรก">
+        <span class="wordmark-dot" aria-hidden="true"></span>
+        <span>SATTHA</span>
+      </button>
+
+      <div class="nav-right">
+        <nav class="nav-links" aria-label="เมนูหลัก">
+          <button type="button" class="nav-btn" data-scroll-to="studio">Sound Studio</button>
+          <button type="button" class="nav-btn" data-scroll-to="companion">AI Companion</button>
+          <button type="button" class="nav-btn" data-scroll-to="about">About</button>
+        </nav>
+
+        <div id="globalStatusPill" class="status-pill" data-state="connected" aria-live="polite">
+          <span class="dot" aria-hidden="true"></span>
+          <span id="globalStatusText">GEMINI READY</span>
+        </div>
+
+        <button
+          type="button"
+          id="mobileMenuBtn"
+          class="mobile-menu-toggle"
+          aria-expanded="false"
+          aria-controls="mobileNavPanel"
+          aria-label="เปิดเมนูนำทาง"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <nav id="mobileNavPanel" class="mobile-nav-panel" aria-label="เมนูนำทางบนมือถือ">
+      <button type="button" class="nav-btn" data-scroll-to="studio">Sound Studio</button>
+      <button type="button" class="nav-btn" data-scroll-to="companion">AI Companion</button>
+      <button type="button" class="nav-btn" data-scroll-to="about">About</button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="heroHeading">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Mindful Chanting &amp; Sound Studio</span>
+          <h1 id="heroHeading">เสียงที่สงบ พื้นที่ให้ความคิด</h1>
+          <p class="hero-lead">
+            พื้นที่สำหรับรับฟังบทสวด ผสานเสียงบรรยากาศ และสนทนาเรื่องความเชื่อด้วยมุมมองที่เปิดกว้าง
+          </p>
+          <div class="hero-actions">
+            <button type="button" class="btn btn-primary" data-scroll-to="studio">
+              เริ่มใช้งาน Sound Studio
+            </button>
+            <button type="button" class="btn btn-secondary" data-scroll-to="companion">
+              สนทนากับ SATTHA AI
+            </button>
+          </div>
+        </div>
+
+        <div class="hero-visual-wrap" aria-hidden="true">
+          <div class="hero-radial-light"></div>
+          <div id="heroSoundOrb" class="sound-orb">
+            <div class="orb-ring orb-ring-1"></div>
+            <div class="orb-ring orb-ring-2"></div>
+            <div class="orb-ring orb-ring-3">
+              <svg class="orb-wave-svg" viewBox="0 0 64 32">
+                <path d="M2 16 C10 16, 12 6, 18 6 C24 6, 26 26, 32 26 C38 26, 40 8, 46 8 C52 8, 54 16, 62 16" stroke-linecap="round"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sound Studio -->
+    <section id="studio" class="section-block" aria-labelledby="studioHeading">
+      <div class="container">
+        <div class="section-header section-header-row">
+          <div>
+            <span class="eyebrow">Sound Studio</span>
+            <h2 id="studioHeading" class="section-title">สตูดิโอจัดการและผสานเสียง</h2>
+          </div>
+          <p class="section-sub">ประมวลผลเสียงภายในเบราว์เซอร์ของคุณโดยตรง (Local Web Audio API)</p>
+        </div>
+
+        <div class="studio-workspace">
+          <!-- Studio Topbar -->
+          <div class="studio-topbar">
+            <div class="studio-tabs" role="tablist" aria-label="โหมดแหล่งเสียง">
+              <button
+                type="button"
+                role="tab"
+                id="tabBtnFile"
+                class="tab-btn"
+                aria-selected="true"
+                aria-controls="tabPanelFile"
+              >
+                ไฟล์เสียง (Audio File)
+              </button>
+              <button
+                type="button"
+                role="tab"
+                id="tabBtnMic"
+                class="tab-btn"
+                aria-selected="false"
+                aria-controls="tabPanelMic"
+              >
+                ไมโครโฟนสด (Live Microphone)
+              </button>
+            </div>
+
+            <div class="studio-master-bar">
+              <span id="studioEngineState" class="studio-status-text" aria-live="polite">
+                พร้อมใช้งาน · ยังไม่มีเสียงกำลังเล่น
+              </span>
+              <button type="button" id="muteMasterBtn" class="btn btn-ghost btn-sm" aria-pressed="false">
+                ปิดเสียงรวม (Mute)
+              </button>
+            </div>
+          </div>
+
+          <!-- Side-by-Side Audio Comparison Stage (Left: Original vs Right: New) -->
+          <div class="compare-stage" aria-label="ส่วนเปรียบเทียบความแตกต่างระหว่างไฟล์เสียงเดิมและไฟล์เสียงใหม่">
+            <div class="compare-header">
+              <div class="compare-title-group">
+                <h3 class="compare-heading">เปรียบเทียบสัญญาณเสียง (Original vs New)</h3>
+                <span id="visualizerStateLabel" class="compare-state-pill" aria-live="polite">IDLE</span>
+              </div>
+
+              <div class="compare-mode-bar" role="radiogroup" aria-label="เลือกวิธีการเปรียบเทียบเสียง">
+                <button type="button" class="compare-mode-btn" role="radio" aria-checked="true" data-comp-mode="frequency">
+                  Sound Frequency
+                </button>
+                <button type="button" class="compare-mode-btn" role="radio" aria-checked="false" data-comp-mode="spectrogram">
+                  Spectrogram
+                </button>
+                <button type="button" class="compare-mode-btn" role="radio" aria-checked="false" data-comp-mode="waveform">
+                  Waveform
+                </button>
+                <button type="button" class="compare-mode-btn" role="radio" aria-checked="false" data-comp-mode="realtime">
+                  คลื่นเทียบเรียลไทม์
+                </button>
+              </div>
+            </div>
+
+            <div class="compare-split-grid">
+              <!-- Left Side: Original File -->
+              <div class="compare-pane pane-original">
+                <div class="compare-pane-head">
+                  <span class="compare-pane-title">
+                    <span class="pane-dot" aria-hidden="true"></span>
+                    <span>ฝั่งซ้าย · ไฟล์เสียงเดิม (Original)</span>
+                  </span>
+                  <span id="compareLeftMeta" class="compare-pane-sub">สัญญาณต้นฉบับก่อนผสานคลื่น</span>
+                </div>
+                <div class="compare-canvas-wrap">
+                  <canvas id="compareCanvasLeft" class="compare-canvas" width="520" height="172" aria-label="กราฟแสดงสัญญาณไฟล์เสียงเดิม"></canvas>
+                </div>
+              </div>
+
+              <!-- Right Side: New Processed File -->
+              <div class="compare-pane pane-new">
+                <div class="compare-pane-head">
+                  <span class="compare-pane-title">
+                    <span class="pane-dot" aria-hidden="true"></span>
+                    <span>ฝั่งขวา · ไฟล์เสียงใหม่ (New Mix)</span>
+                  </span>
+                  <span id="compareRightMeta" class="compare-pane-sub">คลื่น Alpha · ปิดชั้นบรรยากาศอยู่</span>
+                </div>
+                <div class="compare-canvas-wrap">
+                  <canvas id="compareCanvasRight" class="compare-canvas" width="520" height="172" aria-label="กราฟแสดงสัญญาณไฟล์เสียงใหม่ที่ผสานคลื่นแล้ว"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="studio-grid">
+            <!-- Left Main Column: Active Tab -->
+            <div class="studio-col-main">
+              <!-- TAB A: Audio File -->
+              <div id="tabPanelFile" class="tab-panel" role="tabpanel" aria-labelledby="tabBtnFile">
+                <div id="fileDropzone" class="dropzone">
+                  <p class="dropzone-title">ลากไฟล์บทสวดหรือเสียงพูดมาวางที่นี่</p>
+                  <p class="dropzone-hint">รองรับไฟล์เสียงมาตรฐานที่เบราว์เซอร์ถอดรหัสได้ เช่น WAV, MP3, M4A, OGG, FLAC</p>
+                  <input type="file" id="audioFileInput" accept="audio/*" class="sr-only">
+                  <button type="button" id="browseFileBtn" class="btn btn-secondary btn-sm">
+                    เลือกไฟล์เสียงจากเครื่อง
+                  </button>
+                </div>
+
+                <div id="fileMetaCard" class="file-meta-card" hidden>
+                  <div>
+                    <div id="fileNameDisplay" class="file-name">—</div>
+                    <div id="fileStatsDisplay" class="file-stats">—</div>
+                  </div>
+                  <span id="fileDecodeBadge" class="status-pill">พร้อมเล่น</span>
+                </div>
+
+                <div class="transport-panel" aria-label="ส่วนควบคุมการเล่นไฟล์เสียง">
+                  <div class="seek-row">
+                    <span id="elapsedTimeDisplay" class="time-readout">00:00</span>
+                    <label for="seekSlider" class="sr-only">เลื่อนตำแหน่งเวลาของไฟล์เสียง</label>
+                    <input type="range" id="seekSlider" min="0" max="1000" value="0" step="1" disabled>
+                    <span id="totalDurationDisplay" class="time-readout end">00:00</span>
+                  </div>
+
+                  <div class="transport-buttons">
+                    <div class="transport-left">
+                      <button type="button" id="playFileBtn" class="btn btn-primary btn-sm" disabled>
+                        เล่น (Play)
+                      </button>
+                      <button type="button" id="pauseFileBtn" class="btn btn-secondary btn-sm" disabled>
+                        พัก (Pause)
+                      </button>
+                      <button type="button" id="stopFileBtn" class="btn btn-ghost btn-sm" disabled>
+                        หยุด (Stop)
+                      </button>
+                    </div>
+
+                    <button type="button" id="exportWavBtn" class="btn btn-secondary btn-sm" disabled>
+                      ส่งออกเสียงที่ผสานแล้ว (WAV)
+                    </button>
+                  </div>
+                </div>
+
+                <div id="fileStatusBanner" class="notice-bar" role="status" aria-live="polite">
+                  เริ่มต้นด้วยการอัปโหลดไฟล์บทสวดหรือเสียงพูด เพื่อฟังร่วมกับเสียงบรรยากาศและส่งออกเป็นไฟล์ WAV
+                </div>
+              </div>
+
+              <!-- TAB B: Live Microphone -->
+              <div id="tabPanelMic" class="tab-panel" role="tabpanel" aria-labelledby="tabBtnMic" hidden>
+                <div class="mic-controls-card">
+                  <div>
+                    <label for="micDeviceSelect" class="field-label">อุปกรณ์รับเสียง (Audio Input Device)</label>
+                    <div class="device-row">
+                      <select id="micDeviceSelect" class="select-input">
+                        <option value="">ค่าเริ่มต้นของระบบ (จะแสดงรายชื่อเต็มหลังอนุญาตไมโครโฟน)</option>
+                      </select>
+                      <button type="button" id="refreshDevicesBtn" class="btn btn-ghost btn-sm">
+                        รีเฟรชอุปกรณ์
+                      </button>
+                    </div>
+                    <p class="subtle-note">
+                      หมายเหตุสำหรับบลูทูธ: โปรดจับคู่ไมโครโฟนหรือชุดหูฟังบลูทูธในการตั้งค่าระบบปฏิบัติการของเครื่องก่อน เบราว์เซอร์จึงจะมองเห็นเป็นอุปกรณ์รับเสียง เว็บไซต์ไม่สามารถจับคู่บลูทูธให้โดยอัตโนมัติ และแนะนำให้สวมหูฟังขณะเปิดไมโครโฟนสดเพื่อป้องกันเสียงสะท้อนหอน (Feedback Loop)
+                    </p>
+                  </div>
+
+                  <div class="mic-indicator-row">
+                    <div id="micActiveBadge" class="mic-badge" data-active="false" aria-live="polite">
+                      <span class="indicator-dot" aria-hidden="true"></span>
+                      <span id="micActiveText">ไมโครโฟนปิดอยู่</span>
+                    </div>
+
+                    <div class="transport-left">
+                      <button type="button" id="startMicBtn" class="btn btn-primary btn-sm">
+                        เริ่มใช้งานไมโครโฟน (Start)
+                      </button>
+                      <button type="button" id="stopMicBtn" class="btn btn-danger btn-sm" disabled>
+                        หยุดไมโครโฟน (Stop)
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="rec-panel" aria-label="บันทึกเสียงที่ผ่านการผสานแล้ว">
+                  <div class="rec-header">
+                    <span class="field-label" style="margin:0;">บันทึกเสียงที่ผสานแล้ว (Processed Mix Recorder)</span>
+                    <span id="recTimerBadge" class="rec-badge" data-recording="false" aria-live="polite">พร้อมบันทึกเมื่อเปิดไมโครโฟน</span>
+                  </div>
+
+                  <div class="transport-buttons">
+                    <div class="transport-left">
+                      <button type="button" id="startRecBtn" class="btn btn-secondary btn-sm" disabled>
+                        เริ่มบันทึก (Record Output)
+                      </button>
+                      <button type="button" id="stopRecBtn" class="btn btn-danger btn-sm" disabled>
+                        หยุดบันทึก (Stop Recording)
+                      </button>
+                    </div>
+
+                    <button type="button" id="downloadRecBtn" class="btn btn-primary btn-sm" disabled>
+                      ดาวน์โหลดไฟล์บันทึก
+                    </button>
+                  </div>
+                </div>
+
+                <div id="micStatusBanner" class="notice-bar" role="status" aria-live="polite">
+                  กด “เริ่มใช้งานไมโครโฟน” เพื่อขอสิทธิ์เข้าถึงเสียงและมอนิเตอร์ร่วมกับชั้นเสียงบรรยากาศ ระบบประมวลผลภายในเครื่องเท่านั้น
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Side Column: Levels & Sound-Design Presets -->
+            <div class="studio-col-side">
+              <div class="mixer-group" aria-label="ตัวปรับระดับเสียง">
+                <h3 class="panel-heading">ระดับเสียงและการผสาน (Audio Mix)</h3>
+
+                <div class="slider-item">
+                  <div class="slider-top">
+                    <label for="sourceVolSlider">ระดับเสียงหลัก (Source Volume)</label>
+                    <span id="sourceVolVal" class="slider-val">85%</span>
+                  </div>
+                  <input type="range" id="sourceVolSlider" min="0" max="100" value="85">
+                </div>
+
+                <div class="toggle-row">
+                  <div>
+                    <div style="font-size:13.5px;font-weight:500;">ชั้นเสียงบรรยากาศ (Ambience Layer)</div>
+                    <div style="font-size:11.5px;color:var(--text-muted);">เริ่มต้นปิดไว้ และค่อยๆ เพิ่มระดับอย่างนุ่มนวล</div>
+                  </div>
+                  <button
+                    type="button"
+                    id="ambienceToggleBtn"
+                    class="switch-btn"
+                    role="switch"
+                    aria-checked="false"
+                    aria-label="เปิดหรือปิดชั้นเสียงบรรยากาศ"
+                  ></button>
+                </div>
+
+                <div class="slider-item">
+                  <div class="slider-top">
+                    <label for="ambienceVolSlider">ระดับเสียงบรรยากาศ (Ambience Volume)</label>
+                    <span id="ambienceVolVal" class="slider-val">15%</span>
+                  </div>
+                  <input type="range" id="ambienceVolSlider" min="0" max="60" value="15">
+                </div>
+
+                <div class="slider-item">
+                  <div class="slider-top">
+                    <label for="masterVolSlider">ระดับเสียงรวม (Master Volume)</label>
+                    <span id="masterVolVal" class="slider-val">80%</span>
+                  </div>
+                  <input type="range" id="masterVolSlider" min="0" max="100" value="80">
+                </div>
+              </div>
+
+              <div>
+                <h3 class="panel-heading">พรีเซ็ตออกแบบเสียง (Sound-Design Presets)</h3>
+
+                <div id="presetList" class="preset-grid" role="radiogroup" aria-label="เลือกพรีเซ็ตเสียงบรรยากาศ">
+                  <button type="button" class="preset-card" role="radio" aria-checked="true" data-preset="alpha">
+                    <span class="preset-card-top">
+                      <span class="preset-name">Alpha</span>
+                      <span class="preset-tag">~8–13 Hz label</span>
+                    </span>
+                    <span class="preset-desc">แรงบันดาลใจจากป้ายชื่อย่านคลื่นสมอง EEG แบบดั้งเดิม (ราว 8–13 Hz)</span>
+                  </button>
+
+                  <button type="button" class="preset-card" role="radio" aria-checked="false" data-preset="theta">
+                    <span class="preset-card-top">
+                      <span class="preset-name">Theta</span>
+                      <span class="preset-tag">~4–8 Hz label</span>
+                    </span>
+                    <span class="preset-desc">แรงบันดาลใจจากป้ายชื่อย่านคลื่นสมอง EEG แบบดั้งเดิม (ราว 4–8 Hz)</span>
+                  </button>
+
+                  <button type="button" class="preset-card" role="radio" aria-checked="false" data-preset="delta">
+                    <span class="preset-card-top">
+                      <span class="preset-name">Delta</span>
+                      <span class="preset-tag">~0.5–4 Hz label</span>
+                    </span>
+                    <span class="preset-desc">แรงบันดาลใจจากป้ายชื่อย่านคลื่นสมอง EEG แบบดั้งเดิม (ราว 0.5–4 Hz)</span>
+                  </button>
+
+                  <button type="button" class="preset-card" role="radio" aria-checked="false" data-preset="gamma">
+                    <span class="preset-card-top">
+                      <span class="preset-name">Gamma</span>
+                      <span class="preset-tag">~30–100 Hz label</span>
+                    </span>
+                    <span class="preset-desc">แรงบันดาลใจจากป้ายชื่อย่านคลื่นสมอง EEG (มักระบุราว 30–100 Hz นิยามต่างกันไป)</span>
+                  </button>
+
+                  <button type="button" class="preset-card" role="radio" aria-checked="false" data-preset="breath">
+                    <span class="preset-card-top">
+                      <span class="preset-name">Resonant Breath</span>
+                      <span class="preset-tag">Paced Guide</span>
+                    </span>
+                    <span class="preset-desc">ไกด์จังหวะหายใจด้วยภาพและเสียงนุ่มนวล (ไม่ใช่ย่านคลื่นสมอง EEG)</span>
+                  </button>
+                </div>
+
+                <!-- Actual Audible Sound Behavior Disclosure -->
+                <div id="presetBehaviorInfo" class="preset-behavior-box" aria-live="polite">
+                  <strong>ลักษณะเสียงที่ได้ยินจริง (Alpha):</strong> ใช้คลื่นพาหะเสียงอุ่นที่ได้ยินจริง (216 Hz ซ้าย / 221 Hz ขวา แบบสเตอริโอบางเบา) ร่วมกับการมอดูเลตความดังอย่างนุ่มนวล 10 Hz และพื้นผิวเสียงกรองความถี่ต่ำ (หลักฐานด้านเสียงสเตอริโอ/บิโนรัลยังมีจำกัดและผลแตกต่างกันในแต่ละบุคคล)
+                </div>
+
+                <!-- Resonant Breath Guide UI (shown when Resonant Breath is selected) -->
+                <div id="breathGuideBox" class="breath-guide-box breath-guide-hidden" aria-label="ตัวช่วยนำจังหวะหายใจ Resonant Breath">
+                  <div class="breath-circle-stage">
+                    <div class="breath-outer-ring" aria-hidden="true"></div>
+                    <div id="breathCueCircle" class="breath-cue-circle" aria-hidden="true"></div>
+                  </div>
+                  <div id="breathPhaseText" class="breath-phase-label" aria-live="off">หายใจเข้าอย่างสบาย</div>
+
+                  <div class="breath-controls">
+                    <div class="slider-top">
+                      <label for="breathPaceSlider">ความยาวรอบหายใจ (ปรับตามความสบาย ไม่บังคับกลั้น)</label>
+                      <span id="breathPaceVal" class="slider-val">10 วินาที/รอบ</span>
+                    </div>
+                    <input type="range" id="breathPaceSlider" min="6" max="14" step="1" value="10">
+                    <button type="button" id="breathPauseBtn" class="btn btn-ghost btn-sm" style="margin-top:4px;">
+                      พักไกด์หายใจ (Pause Guide)
+                    </button>
+                  </div>
+                </div>
+
+                <div class="science-note">
+                  การใช้เสียงที่อ้างอิงชื่อย่านคลื่นสมอง ไม่ได้หมายความว่าสมองจะเข้าสู่คลื่นนั้นโดยอัตโนมัติ และไม่มีการรับประกันผลในการรักษาหรือลดความเครียด
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SATTHA AI Companion -->
+    <section id="companion" class="section-block" aria-labelledby="companionHeading">
+      <div class="container">
+        <div class="section-header section-header-row">
+          <div>
+            <span class="eyebrow">AI Companion</span>
+            <h2 id="companionHeading" class="section-title">SATTHA AI — เพื่อนสนทนาเรื่องความเชื่อ ปรัชญา และวิทยาศาสตร์</h2>
+          </div>
+          <p class="section-sub">ตรงไปตรงมา เป็นมิตร แยกแยะหลักฐานออกจากความเชื่ออย่างให้เกียรติ</p>
+        </div>
+
+        <div class="chat-shell">
+          <div class="chat-topbar">
+            <div class="chat-mode-group">
+              <div class="mode-switch" role="group" aria-label="เลือกโหมดการทำงานของ SATTHA AI">
+                <button type="button" id="modeDemoBtn" class="mode-btn" aria-pressed="false">Demo</button>
+                <button type="button" id="modeGeminiBtn" class="mode-btn" aria-pressed="true">Gemini</button>
+              </div>
+              <span id="chatConnectionBadge" class="status-pill" data-state="connected" aria-live="polite">
+                <span class="dot" aria-hidden="true"></span>
+                <span id="chatConnectionText">GEMINI READY · โทเคนถาวรพร้อมใช้งาน</span>
+              </span>
+            </div>
+
+            <button type="button" id="clearChatBtn" class="btn btn-ghost btn-sm">
+              ล้างบทสนทนา (Clear Chat)
+            </button>
+          </div>
+
+          <div id="geminiTokenBar" class="gemini-token-bar">
+            <div class="token-row">
+              <div class="token-label-group">
+                <label for="geminiTokenInput" class="token-label">Gemini API Token</label>
+                <span id="tokenPermBadge" class="token-perm-badge">
+                  <span class="perm-dot" aria-hidden="true"></span>
+                  <span id="tokenPermText">ตั้งค่าถาวรแล้ว</span>
+                </span>
+              </div>
+              <div class="token-input-group">
+                <div class="token-input-wrap">
+                  <input
+                    type="password"
+                    id="geminiTokenInput"
+                    class="token-input"
+                    value="AQ.Ab8RN6LlVIDIimrZ5EaOCaB3OZEHvGPUdSlzS0uUiH6RcDb7uA"
+                    placeholder="วาง Gemini API Key / Token ของคุณที่นี่..."
+                    autocomplete="off"
+                    spellcheck="false"
+                  >
+                </div>
+                <div class="token-actions">
+                  <button
+                    type="button"
+                    id="toggleTokenVisBtn"
+                    class="btn btn-ghost btn-sm"
+                    aria-pressed="false"
+                    aria-label="แสดงหรือซ่อน Gemini API Token"
+                  >
+                    แสดง
+                  </button>
+                  <button
+                    type="button"
+                    id="restoreDefaultTokenBtn"
+                    class="btn btn-secondary btn-sm"
+                    title="คืนค่าโทเคนเริ่มต้นถาวร"
+                  >
+                    คืนค่าโทเคนหลัก
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="token-meta-row">
+              <span>ฝังโทเคนถาวรไว้ในระบบแล้ว เปิดใช้งานโหมด Gemini ทันทีโดยไม่ต้องวางใหม่ทุกครั้ง</span>
+              <span class="token-endpoint-tag">Model: gemini-flash-latest · Header: X-goog-api-key</span>
+            </div>
+          </div>
+
+          <div class="prompt-chips" aria-label="คำถามแนะนำ">
+            <button type="button" class="chip-btn" data-prompt="ศาสนากับวิทยาศาสตร์ขัดแย้งกันเสมอไหม?">
+              ศาสนากับวิทยาศาสตร์ขัดแย้งกันเสมอไหม?
+            </button>
+            <button type="button" class="chip-btn" data-prompt="สมาธิส่งผลต่อสมองอย่างไร?">
+              สมาธิส่งผลต่อสมองอย่างไร?
+            </button>
+            <button type="button" class="chip-btn" data-prompt="พุทธศาสนามองความทุกข์อย่างไร?">
+              พุทธศาสนามองความทุกข์อย่างไร?
+            </button>
+            <button type="button" class="chip-btn" data-prompt="อะไรคือข้อเท็จจริง และอะไรคือความเชื่อ?">
+              อะไรคือข้อเท็จจริง และอะไรคือความเชื่อ?
+            </button>
+          </div>
+
+          <div id="chatMessages" class="chat-messages" aria-live="polite"></div>
+
+          <div id="chatErrorBox" class="chat-error-box" hidden role="alert">
+            <span id="chatErrorText">ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ Gemini API ได้</span>
+            <div class="transport-left">
+              <button type="button" id="retryChatBtn" class="btn btn-secondary btn-sm">ลองส่งอีกครั้ง (Retry)</button>
+              <button type="button" id="fallbackDemoBtn" class="btn btn-ghost btn-sm">สลับเป็นโหมด Demo</button>
+            </div>
+          </div>
+
+          <form id="chatForm" class="chat-input-bar" novalidate>
+            <div class="chat-form-row">
+              <label for="chatInput" class="sr-only">พิมพ์คำถามถึง SATTHA AI</label>
+              <textarea
+                id="chatInput"
+                class="chat-textarea"
+                rows="2"
+                maxlength="1500"
+                placeholder="พิมพ์คำถามเรื่องศาสนา ปรัชญา ประวัติศาสตร์ หรือวิทยาศาสตร์..."
+              ></textarea>
+              <button type="submit" id="sendChatBtn" class="btn btn-primary">
+                ส่งข้อความ
+              </button>
+            </div>
+            <div class="chat-hint-row">
+              <span id="chatInputFeedback">กด Enter เพื่อส่ง · Shift+Enter เพื่อขึ้นบรรทัดใหม่</span>
+              <span>ส่งเฉพาะข้อความแชทเท่านั้น (ไม่มีการส่งไฟล์เสียงหรือไมโครโฟนไปยัง AI)</span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- About & Trust -->
+    <section id="about" class="section-block" aria-labelledby="aboutHeading">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">About &amp; Privacy</span>
+          <h2 id="aboutHeading" class="section-title">หลักการทำงาน ความเป็นส่วนตัว และความโปร่งใส</h2>
+        </div>
+
+        <div class="about-grid">
+          <article class="trust-card">
+            <h3>การรับฟังอย่างมีสติและการเรียนรู้</h3>
+            <p>
+              SATTHA ออกแบบมาเพื่อเป็นพื้นที่สงบสำหรับรับฟังบทสวดหรือเสียงพูด ผสานเสียงบรรยากาศตามความชอบส่วนบุคคล และแลกเปลี่ยนความรู้เชิงเปรียบเทียบด้านศาสนา ปรัชญา ประวัติศาสตร์ และวิทยาศาสตร์อย่างมีวิจารณญาณ
+            </p>
+          </article>
+
+          <article class="trust-card">
+            <h3>ความเป็นส่วนตัวของเสียงเป็นค่าเริ่มต้น</h3>
+            <p>
+              ทั้งไฟล์เสียงที่คุณเลือกและสัญญาณไมโครโฟนสดจะถูกประมวลผลภายในเบราว์เซอร์ของคุณด้วย Web Audio API เท่านั้น ไม่มีการอัปโหลดเสียงไปยังผู้ให้บริการ AI และไมโครโฟนจะยุติการเชื่อมต่อทันทีเมื่อคุณกดหยุด
+            </p>
+          </article>
+
+          <article class="trust-card">
+            <h3>ความโปร่งใสของโหมด AI</h3>
+            <p>
+              โหมด Gemini ตั้งค่าโทเคนถาวรไว้พร้อมใช้งานทันทีโดยส่งเฉพาะข้อความคำถามไปยังโมเดล <code>gemini-flash-latest</code> ผ่าน Header <code>X-goog-api-key</code> และสามารถสลับเป็นโหมด Demo เพื่อดูคำตอบตัวอย่างในเครื่องได้ทุกเมื่อ
+            </p>
+          </article>
+        </div>
+
+        <div class="disclaimer-banner" role="note">
+          <strong>ข้อจำกัดความรับผิดชอบ:</strong> “SATTHA เป็นพื้นที่สำหรับการรับฟังและเรียนรู้ ไม่ใช่อุปกรณ์ทางการแพทย์หรือเครื่องมือวินิจฉัยและรักษาโรค ผลของเสียงและการฝึกหายใจอาจแตกต่างกันในแต่ละบุคคล”
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>SATTHA — Mindful Chanting &amp; Sound Studio (Prototype)</span>
+      <span>Minimal Technology Dark · Local Web Audio Processing</span>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+
+      // =========================================================================
+      // Permanent Default Gemini Token Configuration
+      // =========================================================================
+      const DEFAULT_GEMINI_TOKEN = 'AQ.Ab8RN6LlVIDIimrZ5EaOCaB3OZEHvGPUdSlzS0uUiH6RcDb7uA';
+
+      // =========================================================================
+      // Preset Configurations (Audible Sound Design — Honest & Safe)
+      // =========================================================================
+      const SOUND_PRESETS = {
+        alpha: {
+          name: 'Alpha',
+          carrierLeft: 216,
+          carrierRight: 221,
+          harmonicFreq: 324,
+          modRateHz: 10,
+          modDepth: 0.16,
+          noiseLevel: 0.08,
+          filterCutoff: 520,
+          behaviorText:
+            'ลักษณะเสียงที่ได้ยินจริง (Alpha): ใช้คลื่นพาหะเสียงอุ่นที่ได้ยินจริง (216 Hz ซ้าย / 221 Hz ขวา แบบสเตอริโอบางเบา) ร่วมกับการมอดูเลตความดังอย่างนุ่มนวล 10 Hz และพื้นผิวเสียงกรองความถี่ต่ำ (หลักฐานด้านเสียงสเตอริโอ/บิโนรัลยังมีจำกัดและผลแตกต่างกันในแต่ละบุคคล)'
+        },
+        theta: {
+          name: 'Theta',
+          carrierLeft: 174,
+          carrierRight: 178,
+          harmonicFreq: 261,
+          modRateHz: 6,
+          modDepth: 0.20,
+          noiseLevel: 0.11,
+          filterCutoff: 420,
+          behaviorText:
+            'ลักษณะเสียงที่ได้ยินจริง (Theta): เนื่องจากความถี่ 4–8 Hz ต่ำกว่าระยะได้ยินปกติ ระบบจึงใช้โทนเสียงพาหะทุ้มนุ่ม 174 Hz / 178 Hz มอดูเลตจังหวะความดังช้าๆ ที่ 6 Hz ผสานเสียงบรรยากาศความถี่ต่ำอย่างเบามือ'
+        },
+        delta: {
+          name: 'Delta',
+          carrierLeft: 136.1,
+          carrierRight: 138.1,
+          harmonicFreq: 204.15,
+          modRateHz: 2,
+          modDepth: 0.22,
+          noiseLevel: 0.14,
+          filterCutoff: 340,
+          behaviorText:
+            'ลักษณะเสียงที่ได้ยินจริง (Delta): ความถี่ 0.5–4 Hz ไม่ใช่โทนเสียงที่ได้ยินโดยตรง ระบบจึงสร้างพื้นผิวเสียงพาหะความถี่ต่ำ 136.1 Hz ร่วมกับคลื่นมอดูเลตช้า 2 Hz และเสียงกรองความถี่ต่ำคล้ายสายลมสงบ'
+        },
+        gamma: {
+          name: 'Gamma',
+          carrierLeft: 272,
+          carrierRight: 272,
+          harmonicFreq: 408,
+          modRateHz: 40,
+          modDepth: 0.09,
+          noiseLevel: 0.06,
+          filterCutoff: 680,
+          behaviorText:
+            'ลักษณะเสียงที่ได้ยินจริง (Gamma): ใช้โทนเสียงพาหะใส 272 Hz ผสานฮาร์มอนิกคู่ห้า (408 Hz) และการสั่นไหวแอมพลิจูดละเอียด 40 Hz ในระดับเบา เพื่อหลีกเลี่ยงความกระด้างต่อการฟัง'
+        },
+        breath: {
+          name: 'Resonant Breath',
+          carrierLeft: 192,
+          carrierRight: 192,
+          harmonicFreq: 288,
+          modRateHz: 0.1, // dynamically follows breathCycleSec
+          modDepth: 0.34,
+          noiseLevel: 0.16,
+          filterCutoff: 460,
+          behaviorText:
+            'ลักษณะเสียงที่ได้ยินจริง (Resonant Breath): ไม่ใช่ย่านคลื่นสมอง EEG แต่เป็นไกด์นำจังหวะหายใจด้วยวงกลมขยาย-หดตัว พร้อมเสียงโทนอุ่น 192 Hz และพื้นผิวลมหายใจที่ค่อยๆ ดัง-เบาตามจังหวะรอบที่คุณตั้งค่าเอง'
+        }
+      };
+
+      // =========================================================================
+      // Demo Mode Sample Answers (Transparently labeled, SATTHA AI Persona)
+      // =========================================================================
+      const DEMO_RESPONSES = [
+        {
+          match: ['ศาสนากับวิทยาศาสตร์', 'ขัดแย้ง'],
+          reply:
+            '**1. The Hook — เปิดหัวให้ว้าว**\n' +
+            'ใครบอกว่าศาสนากับวิทยาศาสตร์ต้องขึ้นชกบนเวทีเดียวกันตลอดเวลา? จริงๆ ทั้งคู่มักตั้งคำถามคนละหมวด แต่บางจังหวะก็เผลอเหยียบเท้ากันบ้างในประวัติศาสตร์ครับ\n\n' +
+            '**2. The Belief — แก่นความเชื่อ**\n' +
+            'ศาสนาส่วนใหญ่ถือกำเนิดขึ้นเพื่อตอบคำถามเรื่อง **"ความหมาย เป้าหมาย และคุณค่า"** เช่น เราควรใช้ชีวิตอย่างไร หรือจะรับมือกับการสูญเสียอย่างไร โดยใช้เรื่องเล่า พิธีกรรม และศรัทธาเป็นเครื่องมือยึดเหนี่ยวผู้คนในสังคม\n\n' +
+            '**3. The Science & Facts — มุมมองวิทยาศาสตร์และหลักฐาน**\n' +
+            '- **ขอบเขตของวิทยาศาสตร์:** มุ่งตอบว่าธรรมชาติ **"ทำงานอย่างไร" (How)** ผ่านการสังเกต ตั้งสมมติฐาน ทดลองซ้ำ และพร้อมแก้ไขทฤษฎีเสมอเมื่อเจอหลักฐานใหม่\n' +
+            '- **มุมมองทางประวัติศาสตร์:** นักวิทยาศาสตร์ยุคบุกเบิกจำนวนมากมีความเชื่อทางศาสนาควบคู่ไปด้วย ความขัดแย้งมักเกิดขึ้นเมื่อมีการนำข้อความในคัมภีร์มาตีความตามตัวอักษรเพื่ออธิบายปรากฏการณ์กายภาพ เช่น อายุโลกหรือวิวัฒนาการ\n' +
+            '- **ข้อจำกัด:** วิทยาศาสตร์พิสูจน์สิ่งที่อยู่นอกเหนือการวัดผลไม่ได้ ส่วนความเชื่อก็ไม่อาจใช้แทนหลักฐานเชิงประจักษ์ในการอธิบายกลไกทางธรรมชาติได้เช่นกัน\n\n' +
+            '**4. The Punchline — บทสรุปแบบคม ๆ**\n' +
+            'เปรียบง่ายๆ วิทยาศาสตร์เหมือนแผนที่บอกทางว่าถนนลาดยางยังไง ส่วนปรัชญาและศาสนาเหมือนคำถามว่าเราจะขับรถไปทำไม — ดูแผนที่ให้แม่น แล้วเลือกจุดหมายด้วยสติ ก็เดินทางร่วมกันได้แบบ **"น้ำพึ่งเรือ เสือพึ่งป่า"** ครับ'
+        },
+        {
+          match: ['สมาธิ', 'สมอง'],
+          reply:
+            '**1. The Hook — เปิดหัวให้ว้าว**\n' +
+            'การนั่งหลับตานิ่งๆ ดูเหมือนไม่ได้ทำอะไรเลย แต่ในมุมประสาทวิทยาศาสตร์ สมองกำลังจัดระเบียบวงจรความสนใจใหม่อย่างคึกคักทีเดียวครับ\n\n' +
+            '**2. The Belief — แก่นความเชื่อ**\n' +
+            'ในประเพณีตะวันออก เช่น พุทธหรือฮินดู สมาธิและการเจริญสติถูกมองว่าเป็นวิธีฝึกจิตให้ตั้งมั่น ลดความฟุ้งซ่าน และสังเกตอารมณ์ความรู้สึกตามความเป็นจริงโดยไม่ด่วนตัดสิน\n\n' +
+            '**3. The Science & Facts — มุมมองวิทยาศาสตร์และหลักฐาน**\n' +
+            '- **งานวิจัยภาพถ่ายสมอง (fMRI / EEG):** พบความเชื่อมโยงว่าผู้ที่ฝึกสติอย่างสม่ำเสมอมักมีการทำงานของโครงข่ายสมองส่วนฟุ้งซ่าน (Default Mode Network) ลดลงชั่วคราวระหว่างฝึก และใช้สมองส่วนหน้าด้านการกำกับความสนใจได้ดีขึ้น\n' +
+            '- **ด้านจิตวิทยา:** โปรแกรมฝึกสติสมัยใหม่ถูกนำมาศึกษาเพื่อช่วยรับมือความกังวลในชีวิตประจำวัน แต่ผลลัพธ์แตกต่างกันมากในแต่ละบุคคลตามความต่อเนื่องและบริบท\n' +
+            '- **ข้อควรระวังเรื่องเสียงคลื่นสมอง:** แม้การวัด EEG จะใช้ป้ายชื่อย่านความถี่อย่าง Alpha หรือ Theta แต่การเปิดฟังเสียงที่อ้างอิงชื่อเดียวกัน **ไม่ได้แปลว่าสมองจะถูกบังคับให้เข้าสู่คลื่นนั้นโดยอัตโนมัติ** และไม่ใช่การรักษาทางการแพทย์\n\n' +
+            '**4. The Punchline — บทสรุปแบบคม ๆ**\n' +
+            'สมาธิไม่ใช่ปุ่มวิเศษกดปุ๊บสมองอัปเกรดปั๊บ แต่เหมือนการออกกำลังกายกล้ามเนื้อความใส่ใจ — ทำแต่พอดีแบบ **"ช้าเป็นการ นานเป็นคุณ"** ได้ประโยชน์กว่าการเร่งรัดแน่นอนครับ'
+        },
+        {
+          match: ['พุทธศาสนา', 'ความทุกข์', 'ทุกข์'],
+          reply:
+            '**1. The Hook — เปิดหัวให้ว้าว**\n' +
+            'หลายคนเข้าใจว่าพุทธศาสนามองโลกในแง่ร้ายเพราะพูดแต่คำว่า "ทุกข์" ทั้งที่จริงๆ แล้วแนวคิดนี้ใกล้เคียงการวิเคราะห์ปัญหาแบบช่างเทคนิคมากกว่าการนั่งเศร้าครับ\n\n' +
+            '**2. The Belief — แก่นความเชื่อ**\n' +
+            'คำว่า **"ทุกข์" (Dukkha)** ในแนวคิดพุทธไม่ได้แปลว่าความเสียใจอย่างเดียว แต่หมายถึง **"ความบีบคั้น ความไม่คงทน หรือความไม่สมดั่งใจ"** เมื่อสิ่งต่างๆ เปลี่ยนแปลงไปตามเหตุปัจจัย แต่ใจเรายังอยากให้มันอยู่นิ่งเหมือนเดิม แก่นของอริยสัจ 4 จึงเสนอให้ทำความเข้าใจสาเหตุแทนการหนีปัญหา\n\n' +
+            '**3. The Science & Facts — มุมมองวิทยาศาสตร์และหลักฐาน**\n' +
+            '- **จิตวิทยาปริชาน (Cognitive Psychology):** แนวคิดเรื่องการสังเกตความคิดโดยไม่ยึดติดว่าความคิดคือตัวเราทั้งหมด มีจุดร่วมกับการบำบัดความคิดและพฤติกรรมสมัยใหม่ เช่น การปรับมุมมองต่อเหตุการณ์ที่ควบคุมไม่ได้\n' +
+            '- **จิตวิทยาวิวัฒนาการ:** มนุษย์มีแนวโน้มไม่พอใจอยู่ลึกๆ (Hedonic Treadmill) เพื่อผลักดันให้อยู่รอด ความรู้สึกไม่สมหวังจึงเป็นกลไกธรรมชาติของสมอง ไม่ใช่ความผิดบาปส่วนตัว\n' +
+            '- **ข้อจำกัดและการตีความ:** ส่วนที่เป็นความเชื่อเรื่องภพภูมิหรือสังสารวัฏถือเป็นกรอบความเชื่อทางศาสนา ซึ่งอยู่นอกเหนือขอบเขตการพิสูจน์ทางวิทยาศาสตร์\n\n' +
+            '**4. The Punchline — บทสรุปแบบคม ๆ**\n' +
+            'ฝนตกเป็นเรื่องของฟ้าอากาศ แต่การบ่นด่าเมฆทั้งวันเป็นส่วนที่เราเติมเข้าไปเอง — รู้จักวางร่มให้ถูกจังหวะ ก็ไม่ต้องเปียกใจซ้ำสองครับ'
+        },
+        {
+          match: ['ข้อเท็จจริง', 'ความเชื่อ'],
+          reply:
+            '**1. The Hook — เปิดหัวให้ว้าว**\n' +
+            'เส้นแบ่งระหว่าง "ข้อเท็จจริง" กับ "ความเชื่อ" ไม่ได้มีไว้ตัดสินว่าใครฉลาดกว่าใคร แต่มีไว้กันไม่ให้เราเถียงกันคนละภาษานั่นเองครับ\n\n' +
+            '**2. The Belief — แก่นความเชื่อ**\n' +
+            '**ความเชื่อ (Belief / Faith)** คือการยอมรับคุณค่า ความหมาย หรือกรอบอธิบายโลกที่อาจไม่ต้องรอหลักฐานทางห้องทดลอง เช่น ความศรัทธาในสิ่งศักดิ์สิทธิ์ คุณค่าทางศีลธรรม หรือพิธีกรรมที่ให้ความอบอุ่นใจแก่ชุมชน\n\n' +
+            '**3. The Science & Facts — มุมมองวิทยาศาสตร์และหลักฐาน**\n' +
+            '- **ข้อเท็จจริงที่ตรวจสอบได้ (Verifiable Fact):** คือข้อมูลที่สังเกต วัดผล หรือตรวจสอบซ้ำได้ไม่ว่าผู้ตรวจจะมีศาสนาใด เช่น อุณหภูมิน้ำเดือดที่ความดันระดับน้ำทะเล หรืออายุวัตถุโบราณจากการวัดคาร์บอนกัมมันตรังสี (ซึ่งระบุค่าความคลาดเคลื่อนไว้ชัดเจน)\n' +
+            '- **สมมติฐานและการตีความ:** คำอธิบายที่กำลังรอข้อมูลสนับสนุนเพิ่ม ในทางวิชาการจะเรียกว่า **"สมมติฐาน"** ไม่ฟันธงเป็นความจริงตายตัว\n' +
+            '- **จิตวิทยาการรับรู้:** สมองมนุษย์ทุกคนมีอคติยืนยันความเชื่อเดิม (Confirmation Bias) เราจึงมักจำเฉพาะข้อมูลที่ตรงใจตัวเองได้แม่นเป็นพิเศษ\n\n' +
+            '**4. The Punchline — บทสรุปแบบคม ๆ**\n' +
+            'ความเชื่อช่วยให้ใจมีที่พัก ส่วนข้อเท็จจริงช่วยให้เท้าไม่เดินตกหลุม — แยกสองเรื่องนี้ออกจากกันได้ชัดเจน การคุยเรื่องยากๆ ก็สบายใจขึ้นเยอะครับ'
+        }
+      ];
+
+      const GENERIC_DEMO_FALLBACK =
+        '**1. The Hook — เปิดหัวให้ว้าว**\n' +
+        'เป็นประเด็นที่น่าชวนคิดต่อมากครับ เพราะเรื่องความเชื่อ พิธีกรรม และมุมมองวิทยาศาสตร์มักมีรายละเอียดซ้อนทับกันหลายชั้นเสมอ\n\n' +
+        '**2. The Belief — แก่นความเชื่อ**\n' +
+        'ในมิติทางวัฒนธรรมและศาสนา แนวคิดหรือพิธีกรรมส่วนใหญ่พัฒนาขึ้นเพื่อสร้างความหมายร่วมกัน ลดความไม่มั่นคงทางใจ และวางกติกาการอยู่ร่วมกันของสังคมในแต่ละยุคสมัย\n\n' +
+        '**3. The Science & Facts — มุมมองวิทยาศาสตร์และหลักฐาน**\n' +
+        '- **โหมดการทำงานปัจจุบัน:** ขณะนี้คุณกำลังใช้งาน **Demo Mode** ซึ่งทำงานภายในเบราว์เซอร์ คำตอบนี้จึงเป็นคำตอบตัวอย่างที่จัดเตรียมไว้ในเครื่อง\n' +
+        '- **วิธีตรวจสอบเชิงวิชาการ:** เมื่อพิจารณาประเด็นความเชื่อ ควรแยกเป็น 3 ส่วนเสมอ ได้แก่ (1) หลักฐานทางประวัติศาสตร์/โบราณคดี/จิตวิทยาที่ตรวจสอบซ้ำได้ (2) สมมติฐานที่ยังศึกษาอยู่ และ (3) ความศรัทธาส่วนบุคคล\n' +
+        '- **หากต้องการสนทนาสดกับ Gemini:** สามารถสลับไปที่โหมด **Gemini** ซึ่งได้ตั้งค่าโทเคนถาวรไว้พร้อมใช้งานทันที\n\n' +
+        '**4. The Punchline — บทสรุปแบบคม ๆ**\n' +
+        'ระหว่างอยู่ในโหมดสาธิต ลองคลิกปุ่มคำถามแนะนำทั้ง 4 หัวข้อด้านบน หรือสลับกลับไปโหมด Gemini เพื่อถามตอบแบบสดได้เลยครับ';
+
+      // =========================================================================
+      // Application State
+      // =========================================================================
+      const state = {
+        activeTab: 'file', // 'file' | 'mic'
+        audioCtx: null,
+        masterGain: null,
+        sourceGain: null,
+        ambienceGain: null,
+        analyser: null,
+        compressor: null,
+        noiseBuffer: null,
+
+        // Volumes & toggles
+        sourceVolume: 0.85,
+        ambienceEnabled: false,
+        ambienceVolume: 0.15,
+        masterVolume: 0.80,
+        isMuted: false,
+        currentPreset: 'alpha',
+
+        // Live Ambience Graph Nodes
+        ambienceNodes: null,
+
+        // File Mode State
+        currentFile: null,
+        fileObjectUrl: null,
+        audioBuffer: null,
+        bufferSourceNode: null,
+        isPlayingFile: false,
+        isPausedFile: false,
+        fileOffset: 0,
+        fileStartContextTime: 0,
+        seekRafId: null,
+        isExporting: false,
+
+        // Live Microphone Mode State
+        micStream: null,
+        micSourceNode: null,
+        micRecordDest: null,
+        selectedDeviceId: '',
+        mediaRecorder: null,
+        recordedChunks: [],
+        recordedBlob: null,
+        recordedMimeType: '',
+        recStartTime: 0,
+        recTimerInterval: null,
+
+        // Visualizer, Comparison & Motion
+        dryTapGain: null,
+        dryAnalyser: null,
+        comparisonMode: 'frequency', // 'frequency' | 'spectrogram' | 'waveform' | 'realtime'
+        filePeaks: null,
+        fileSpectrum: null,
+        specLeftCanvas: null,
+        specRightCanvas: null,
+        lastDryFreq: null,
+        lastWetFreq: null,
+        lastDryTime: null,
+        lastWetTime: null,
+        visualizerRafId: null,
+        prefersReducedMotion: window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+
+        // Resonant Breath State
+        breathCycleSec: 10,
+        breathPaused: false,
+        breathRafId: null,
+        breathPhaseElapsed: 0,
+        breathLastTs: 0,
+
+        // Chat State (Defaulted to Gemini mode with permanent token)
+        chatMode: 'gemini', // 'demo' | 'gemini'
+        geminiStatus: 'unknown', // 'unknown' | 'connected' | 'busy' | 'offline'
+        geminiApiKey: 'AQ.Ab8RN6LlVIDIimrZ5EaOCaB3OZEHvGPUdSlzS0uUiH6RcDb7uA', // <-- ตัวแปรเก็บค่า Gemini API Key ถาวรในหน่วยความจำ
+        tokenVisible: false,
+        chatHistory: [],
+        isChatLoading: false,
+        lastFailedMessage: '',
+        lastFailedRenderedUser: false
+      };
+
+      // =========================================================================
+      // DOM References
+      // =========================================================================
+      const dom = {};
+
+      function cacheDom() {
+        dom.globalStatusPill = document.getElementById('globalStatusPill');
+        dom.globalStatusText = document.getElementById('globalStatusText');
+        dom.mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        dom.mobileNavPanel = document.getElementById('mobileNavPanel');
+        dom.heroSoundOrb = document.getElementById('heroSoundOrb');
+
+        dom.tabBtnFile = document.getElementById('tabBtnFile');
+        dom.tabBtnMic = document.getElementById('tabBtnMic');
+        dom.tabPanelFile = document.getElementById('tabPanelFile');
+        dom.tabPanelMic = document.getElementById('tabPanelMic');
+        dom.studioEngineState = document.getElementById('studioEngineState');
+        dom.muteMasterBtn = document.getElementById('muteMasterBtn');
+
+        dom.compareCanvasLeft = document.getElementById('compareCanvasLeft');
+        dom.compareCanvasRight = document.getElementById('compareCanvasRight');
+        dom.compareLeftMeta = document.getElementById('compareLeftMeta');
+        dom.compareRightMeta = document.getElementById('compareRightMeta');
+        dom.compareModeBtns = Array.from(document.querySelectorAll('.compare-mode-btn'));
+        dom.visualizerStateLabel = document.getElementById('visualizerStateLabel');
+
+        dom.fileDropzone = document.getElementById('fileDropzone');
+        dom.audioFileInput = document.getElementById('audioFileInput');
+        dom.browseFileBtn = document.getElementById('browseFileBtn');
+        dom.fileMetaCard = document.getElementById('fileMetaCard');
+        dom.fileNameDisplay = document.getElementById('fileNameDisplay');
+        dom.fileStatsDisplay = document.getElementById('fileStatsDisplay');
+        dom.fileDecodeBadge = document.getElementById('fileDecodeBadge');
+        dom.elapsedTimeDisplay = document.getElementById('elapsedTimeDisplay');
+        dom.totalDurationDisplay = document.getElementById('totalDurationDisplay');
+        dom.seekSlider = document.getElementById('seekSlider');
+        dom.playFileBtn = document.getElementById('playFileBtn');
+        dom.pauseFileBtn = document.getElementById('pauseFileBtn');
+        dom.stopFileBtn = document.getElementById('stopFileBtn');
+        dom.exportWavBtn = document.getElementById('exportWavBtn');
+        dom.fileStatusBanner = document.getElementById('fileStatusBanner');
+
+        dom.micDeviceSelect = document.getElementById('micDeviceSelect');
+        dom.refreshDevicesBtn = document.getElementById('refreshDevicesBtn');
+        dom.micActiveBadge = document.getElementById('micActiveBadge');
+        dom.micActiveText = document.getElementById('micActiveText');
+        dom.startMicBtn = document.getElementById('startMicBtn');
+        dom.stopMicBtn = document.getElementById('stopMicBtn');
+        dom.recTimerBadge = document.getElementById('recTimerBadge');
+        dom.startRecBtn = document.getElementById('startRecBtn');
+        dom.stopRecBtn = document.getElementById('stopRecBtn');
+        dom.downloadRecBtn = document.getElementById('downloadRecBtn');
+        dom.micStatusBanner = document.getElementById('micStatusBanner');
+
+        dom.sourceVolSlider = document.getElementById('sourceVolSlider');
+        dom.sourceVolVal = document.getElementById('sourceVolVal');
+        dom.ambienceToggleBtn = document.getElementById('ambienceToggleBtn');
+        dom.ambienceVolSlider = document.getElementById('ambienceVolSlider');
+        dom.ambienceVolVal = document.getElementById('ambienceVolVal');
+        dom.masterVolSlider = document.getElementById('masterVolSlider');
+        dom.masterVolVal = document.getElementById('masterVolVal');
+
+        dom.presetCards = Array.from(document.querySelectorAll('.preset-card'));
+        dom.presetBehaviorInfo = document.getElementById('presetBehaviorInfo');
+        dom.breathGuideBox = document.getElementById('breathGuideBox');
+        dom.breathCueCircle = document.getElementById('breathCueCircle');
+        dom.breathPhaseText = document.getElementById('breathPhaseText');
+        dom.breathPaceSlider = document.getElementById('breathPaceSlider');
+        dom.breathPaceVal = document.getElementById('breathPaceVal');
+        dom.breathPauseBtn = document.getElementById('breathPauseBtn');
+
+        dom.modeDemoBtn = document.getElementById('modeDemoBtn');
+        dom.modeGeminiBtn = document.getElementById('modeGeminiBtn');
+        dom.geminiTokenBar = document.getElementById('geminiTokenBar');
+        dom.geminiTokenInput = document.getElementById('geminiTokenInput');
+        dom.tokenPermBadge = document.getElementById('tokenPermBadge');
+        dom.tokenPermText = document.getElementById('tokenPermText');
+        dom.toggleTokenVisBtn = document.getElementById('toggleTokenVisBtn');
+        dom.restoreDefaultTokenBtn = document.getElementById('restoreDefaultTokenBtn');
+        dom.chatConnectionBadge = document.getElementById('chatConnectionBadge');
+        dom.chatConnectionText = document.getElementById('chatConnectionText');
+        dom.clearChatBtn = document.getElementById('clearChatBtn');
+        dom.promptChips = Array.from(document.querySelectorAll('.chip-btn'));
+        dom.chatMessages = document.getElementById('chatMessages');
+        dom.chatErrorBox = document.getElementById('chatErrorBox');
+        dom.chatErrorText = document.getElementById('chatErrorText');
+        dom.retryChatBtn = document.getElementById('retryChatBtn');
+        dom.fallbackDemoBtn = document.getElementById('fallbackDemoBtn');
+        dom.chatForm = document.getElementById('chatForm');
+        dom.chatInput = document.getElementById('chatInput');
+        dom.sendChatBtn = document.getElementById('sendChatBtn');
+        dom.chatInputFeedback = document.getElementById('chatInputFeedback');
+      }
+
+      // =========================================================================
+      // Utility Helpers
+      // =========================================================================
+      function formatSeconds(sec) {
+        if (!Number.isFinite(sec) || sec < 0) return '00:00';
+        const total = Math.floor(sec);
+        const mins = Math.floor(total / 60);
+        const secs = total % 60;
+        return String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+      }
+
+      function formatBytes(bytes) {
+        if (!Number.isFinite(bytes) || bytes <= 0) return '0 KB';
+        if (bytes < 1024 * 1024) {
+          return (bytes / 1024).toFixed(1) + ' KB';
+        }
+        return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+      }
+
+      function setBanner(el, message, kind) {
+        el.textContent = message;
+        if (kind) {
+          el.setAttribute('data-kind', kind);
+        } else {
+          el.removeAttribute('data-kind');
+        }
+      }
+
+      function isAnyAudioActive() {
+        return Boolean(
+          state.isPlayingFile ||
+          state.micStream ||
+          (state.ambienceEnabled && state.audioCtx && state.audioCtx.state === 'running')
+        );
+      }
+
+      function updateComparisonHeaders() {
+        if (!dom.compareLeftMeta || !dom.compareRightMeta) return;
+
+        if (state.activeTab === 'mic' && state.micStream) {
+          dom.compareLeftMeta.textContent = 'สัญญาณไมโครโฟนต้นฉบับ (Dry Input)';
+        } else if (state.currentFile && state.audioBuffer) {
+          const shortName = state.currentFile.name.length > 26
+            ? state.currentFile.name.slice(0, 24) + '…'
+            : state.currentFile.name;
+          dom.compareLeftMeta.textContent = 'ต้นฉบับ · ' + shortName;
+        } else {
+          dom.compareLeftMeta.textContent = 'สัญญาณต้นฉบับก่อนผสานคลื่น';
+        }
+
+        const presetName = SOUND_PRESETS[state.currentPreset]
+          ? SOUND_PRESETS[state.currentPreset].name
+          : 'Alpha';
+
+        if (state.isMuted) {
+          dom.compareRightMeta.textContent = 'ปิดเสียงรวม (Muted) · คลื่น ' + presetName;
+        } else if (state.ambienceEnabled) {
+          dom.compareRightMeta.textContent =
+            'ผสานคลื่น ' + presetName + ' (' + Math.round(state.ambienceVolume * 100) + '%) · รวม ' +
+            Math.round(state.masterVolume * 100) + '%';
+        } else {
+          dom.compareRightMeta.textContent =
+            'คลื่น ' + presetName + ' · ปิดชั้นบรรยากาศอยู่ (เปิด Ambience เพื่อผสาน)';
+        }
+      }
+
+      function updateStudioEngineStatus() {
+        const parts = [];
+        if (state.isPlayingFile) {
+          parts.push('กำลังเล่นไฟล์เสียง');
+        } else if (state.isPausedFile) {
+          parts.push('พักไฟล์เสียงชั่วคราว');
+        }
+        if (state.micStream) {
+          parts.push('ไมโครโฟนสดทำงานอยู่');
+        }
+        if (state.ambienceEnabled) {
+          parts.push('เปิดเสียงบรรยากาศ (' + SOUND_PRESETS[state.currentPreset].name + ')');
+        }
+        if (state.isMuted) {
+          parts.push('ปิดเสียงรวม (Muted)');
+        }
+
+        if (parts.length === 0) {
+          dom.studioEngineState.textContent = 'พร้อมใช้งาน · ยังไม่มีเสียงกำลังเล่น';
+          dom.visualizerStateLabel.textContent = 'IDLE';
+        } else if (state.isPausedFile && !state.micStream && !state.ambienceEnabled) {
+          dom.studioEngineState.textContent = parts.join(' · ');
+          dom.visualizerStateLabel.textContent = 'PAUSED';
+        } else {
+          dom.studioEngineState.textContent = parts.join(' · ');
+          dom.visualizerStateLabel.textContent = state.isMuted ? 'MUTED' : 'ACTIVE';
+        }
+
+        updateComparisonHeaders();
+      }
+
+      // =========================================================================
+      // Web Audio API Initialization & Ambience Generator
+      // =========================================================================
+      function createWarmNoiseBuffer(ctx) {
+        const length = ctx.sampleRate * 4;
+        const buffer = ctx.createBuffer(1, length, ctx.sampleRate);
+        const data = buffer.getChannelData(0);
+        let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
+        for (let i = 0; i < length; i++) {
+          const white = Math.random() * 2 - 1;
+          b0 = 0.99886 * b0 + white * 0.0555179;
+          b1 = 0.99332 * b1 + white * 0.0750759;
+          b2 = 0.96900 * b2 + white * 0.1538520;
+          b3 = 0.86650 * b3 + white * 0.3104856;
+          b4 = 0.55000 * b4 + white * 0.5329522;
+          b5 = -0.7616 * b5 - white * 0.0168980;
+          data[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.035;
+          b6 = white * 0.115926;
+        }
+        return buffer;
+      }
+
+      async function initAudioContext() {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) {
+          throw new Error('เบราว์เซอร์นี้ไม่รองรับ Web Audio API');
+        }
+
+        if (!state.audioCtx) {
+          const ctx = new AudioCtx();
+          state.audioCtx = ctx;
+
+          state.sourceGain = ctx.createGain();
+          state.sourceGain.gain.value = state.sourceVolume;
+
+          state.ambienceGain = ctx.createGain();
+          state.ambienceGain.gain.value = 0;
+
+          state.masterGain = ctx.createGain();
+          state.masterGain.gain.value = state.isMuted ? 0 : state.masterVolume;
+
+          state.compressor = ctx.createDynamicsCompressor();
+          state.compressor.threshold.value = -6;
+          state.compressor.knee.value = 12;
+          state.compressor.ratio.value = 6;
+          state.compressor.attack.value = 0.005;
+          state.compressor.release.value = 0.15;
+
+          state.analyser = ctx.createAnalyser();
+          state.analyser.fftSize = 2048;
+          state.analyser.smoothingTimeConstant = 0.82;
+
+          state.dryTapGain = ctx.createGain();
+          state.dryTapGain.gain.value = 1.0;
+          state.dryAnalyser = ctx.createAnalyser();
+          state.dryAnalyser.fftSize = 2048;
+          state.dryAnalyser.smoothingTimeConstant = 0.82;
+          state.dryTapGain.connect(state.dryAnalyser);
+
+          state.sourceGain.connect(state.masterGain);
+          state.ambienceGain.connect(state.masterGain);
+          state.masterGain.connect(state.compressor);
+          state.compressor.connect(state.analyser);
+          state.analyser.connect(ctx.destination);
+
+          state.noiseBuffer = createWarmNoiseBuffer(ctx);
+        }
+
+        if (state.audioCtx.state === 'suspended') {
+          await state.audioCtx.resume();
+        }
+
+        if (state.ambienceEnabled && !state.ambienceNodes) {
+          rebuildLiveAmbienceNodes();
+          rampAmbienceGain(state.ambienceVolume);
+        }
+
+        return state.audioCtx;
+      }
+
+      function createPresetGeneratorGraph(ctx, noiseBuf, presetKey, breathCycleSec, destinationNode) {
+        const cfg = SOUND_PRESETS[presetKey] || SOUND_PRESETS.alpha;
+        const modHz = presetKey === 'breath' ? (1 / Math.max(4, breathCycleSec)) : cfg.modRateHz;
+
+        const outBus = ctx.createGain();
+        outBus.gain.value = 0.55;
+
+        const modCarrierGain = ctx.createGain();
+        modCarrierGain.gain.value = 1 - cfg.modDepth * 0.5;
+
+        const lfo = ctx.createOscillator();
+        lfo.type = 'sine';
+        lfo.frequency.value = modHz;
+
+        const lfoDepth = ctx.createGain();
+        lfoDepth.gain.value = cfg.modDepth * 0.5;
+        lfo.connect(lfoDepth);
+        lfoDepth.connect(modCarrierGain.gain);
+
+        const merger = ctx.createChannelMerger(2);
+
+        const oscLeft = ctx.createOscillator();
+        oscLeft.type = 'sine';
+        oscLeft.frequency.value = cfg.carrierLeft;
+        const leftGain = ctx.createGain();
+        leftGain.gain.value = 0.28;
+        oscLeft.connect(leftGain);
+        leftGain.connect(merger, 0, 0);
+
+        const oscRight = ctx.createOscillator();
+        oscRight.type = 'sine';
+        oscRight.frequency.value = cfg.carrierRight;
+        const rightGain = ctx.createGain();
+        rightGain.gain.value = 0.28;
+        oscRight.connect(rightGain);
+        rightGain.connect(merger, 0, 1);
+
+        merger.connect(modCarrierGain);
+
+        const oscHarmonic = ctx.createOscillator();
+        oscHarmonic.type = 'sine';
+        oscHarmonic.frequency.value = cfg.harmonicFreq;
+        const harmGain = ctx.createGain();
+        harmGain.gain.value = 0.05;
+        oscHarmonic.connect(harmGain);
+        harmGain.connect(modCarrierGain);
+
+        const toneFilter = ctx.createBiquadFilter();
+        toneFilter.type = 'lowpass';
+        toneFilter.frequency.value = cfg.filterCutoff;
+        modCarrierGain.connect(toneFilter);
+        toneFilter.connect(outBus);
+
+        const noiseSource = ctx.createBufferSource();
+        noiseSource.buffer = noiseBuf;
+        noiseSource.loop = true;
+
+        const noiseFilter = ctx.createBiquadFilter();
+        noiseFilter.type = 'lowpass';
+        noiseFilter.frequency.value = cfg.filterCutoff * 0.85;
+
+        const noiseGain = ctx.createGain();
+        noiseGain.gain.value = cfg.noiseLevel;
+
+        noiseSource.connect(noiseFilter);
+        noiseFilter.connect(noiseGain);
+        noiseGain.connect(outBus);
+
+        outBus.connect(destinationNode);
+
+        const now = ctx.currentTime;
+        oscLeft.start(now);
+        oscRight.start(now);
+        oscHarmonic.start(now);
+        lfo.start(now);
+        noiseSource.start(now);
+
+        return {
+          outBus,
+          lfo,
+          oscLeft,
+          oscRight,
+          oscHarmonic,
+          noiseSource,
+          stopAndDisconnect: function () {
+            const stopAt = ctx.currentTime + 0.08;
+            try {
+              outBus.gain.setTargetAtTime(0, ctx.currentTime, 0.02);
+              oscLeft.stop(stopAt);
+              oscRight.stop(stopAt);
+              oscHarmonic.stop(stopAt);
+              lfo.stop(stopAt);
+              noiseSource.stop(stopAt);
+            } catch (_) { /* ignore */ }
+            setTimeout(function () {
+              try { outBus.disconnect(); } catch (_) { /* ignore */ }
+            }, 120);
+          }
+        };
+      }
+
+      function rebuildLiveAmbienceNodes() {
+        if (!state.audioCtx) return;
+        if (state.ambienceNodes) {
+          state.ambienceNodes.stopAndDisconnect();
+          state.ambienceNodes = null;
+        }
+        if (state.ambienceEnabled) {
+          state.ambienceNodes = createPresetGeneratorGraph(
+            state.audioCtx,
+            state.noiseBuffer,
+            state.currentPreset,
+            state.breathCycleSec,
+            state.ambienceGain
+          );
+        }
+      }
+
+      function rampAmbienceGain(targetVal) {
+        if (!state.audioCtx || !state.ambienceGain) return;
+        const now = state.audioCtx.currentTime;
+        state.ambienceGain.gain.cancelScheduledValues(now);
+        state.ambienceGain.gain.setValueAtTime(state.ambienceGain.gain.value, now);
+        state.ambienceGain.gain.linearRampToValueAtTime(targetVal, now + 0.18);
+      }
+
+      // =========================================================================
+      // Audio File Pipeline (Load, Play, Pause, Stop, Seek, WAV Export)
+      // =========================================================================
+      async function loadAudioFile(file) {
+        if (!file) return;
+
+        if (file.type && !file.type.startsWith('audio/') && !/\.(wav|mp3|m4a|aac|ogg|flac|webm|opus)$/i.test(file.name)) {
+          setBanner(dom.fileStatusBanner, 'ไฟล์ที่เลือกไม่ใช่รูปแบบไฟล์เสียงที่รองรับ กรุณาเลือกไฟล์เสียงใหม่', 'error');
+          return;
+        }
+
+        stopFile();
+
+        if (state.fileObjectUrl) {
+          URL.revokeObjectURL(state.fileObjectUrl);
+          state.fileObjectUrl = null;
+        }
+
+        state.currentFile = file;
+        state.fileObjectUrl = URL.createObjectURL(file);
+
+        dom.fileMetaCard.hidden = false;
+        dom.fileNameDisplay.textContent = file.name;
+        dom.fileStatsDisplay.textContent = formatBytes(file.size) + ' · กำลังถอดรหัสเสียง...';
+        dom.fileDecodeBadge.textContent = 'กำลังโหลด...';
+        dom.playFileBtn.disabled = true;
+        dom.pauseFileBtn.disabled = true;
+        dom.stopFileBtn.disabled = true;
+        dom.seekSlider.disabled = true;
+        dom.exportWavBtn.disabled = true;
+        setBanner(dom.fileStatusBanner, 'กำลังอ่านและถอดรหัสไฟล์เสียง "' + file.name + '"...', '');
+
+        try {
+          const ctx = await initAudioContext();
+          const arrayBuffer = await file.arrayBuffer();
+          const decodedBuffer = await ctx.decodeAudioData(arrayBuffer);
+
+          state.audioBuffer = decodedBuffer;
+          state.fileOffset = 0;
+          state.filePeaks = computeBufferPeaks(decodedBuffer, 180);
+          state.fileSpectrum = computeBufferSpectrumOverview(decodedBuffer);
+          state.lastDryFreq = null;
+          state.lastWetFreq = null;
+          state.lastDryTime = null;
+          state.lastWetTime = null;
+          clearSpectrogramBuffers();
+
+          dom.fileStatsDisplay.textContent =
+            formatBytes(file.size) +
+            ' · ความยาว ' + formatSeconds(decodedBuffer.duration) +
+            ' · ' + decodedBuffer.sampleRate + ' Hz';
+          dom.fileDecodeBadge.textContent = 'พร้อมเล่น';
+          dom.elapsedTimeDisplay.textContent = '00:00';
+          dom.totalDurationDisplay.textContent = formatSeconds(decodedBuffer.duration);
+          dom.seekSlider.value = '0';
+          dom.seekSlider.disabled = false;
+          dom.playFileBtn.disabled = false;
+          dom.exportWavBtn.disabled = false;
+
+          updateStudioEngineStatus();
+          ensureVisualizerLoop();
+          setBanner(dom.fileStatusBanner, 'โหลดไฟล์เสียงสำเร็จ พร้อมกดเล่นหรือผสานเสียงบรรยากาศ', 'success');
+        } catch (err) {
+          state.audioBuffer = null;
+          if (state.fileObjectUrl) {
+            URL.revokeObjectURL(state.fileObjectUrl);
+            state.fileObjectUrl = null;
+          }
+          dom.fileDecodeBadge.textContent = 'ไม่รองรับ';
+          dom.fileStatsDisplay.textContent = formatBytes(file.size) + ' · ถอดรหัสไม่สำเร็จ';
+          setBanner(
+            dom.fileStatusBanner,
+            'ไม่สามารถถอดรหัสไฟล์เสียงนี้ได้ กรุณาตรวจสอบว่าเป็นไฟล์เสียงที่ไม่เสียหายและเบราว์เซอร์รองรับ',
+            'error'
+          );
+        }
+      }
+
+      function cleanupBufferSourceNode() {
+        if (state.bufferSourceNode) {
+          state.bufferSourceNode._manualStop = true;
+          try {
+            state.bufferSourceNode.stop();
+          } catch (_) { /* ignore */ }
+          try {
+            state.bufferSourceNode.disconnect();
+          } catch (_) { /* ignore */ }
+          state.bufferSourceNode = null;
+        }
+        if (state.seekRafId) {
+          cancelAnimationFrame(state.seekRafId);
+          state.seekRafId = null;
+        }
+      }
+
+      async function playFile() {
+        if (!state.audioBuffer) return;
+
+        try {
+          const ctx = await initAudioContext();
+          cleanupBufferSourceNode();
+
+          if (state.fileOffset >= state.audioBuffer.duration) {
+            state.fileOffset = 0;
+          }
+
+          const source = ctx.createBufferSource();
+          source.buffer = state.audioBuffer;
+          source.connect(state.dryTapGain);
+          source.connect(state.sourceGain);
+
+          source.onended = function () {
+            if (source._manualStop) return;
+            state.isPlayingFile = false;
+            state.isPausedFile = false;
+            state.fileOffset = 0;
+            dom.seekSlider.value = '0';
+            dom.elapsedTimeDisplay.textContent = '00:00';
+            dom.playFileBtn.disabled = false;
+            dom.pauseFileBtn.disabled = true;
+            dom.stopFileBtn.disabled = true;
+            updateStudioEngineStatus();
+            ensureVisualizerLoop();
+            setBanner(dom.fileStatusBanner, 'เล่นไฟล์เสียงจบสมบูรณ์', '');
+          };
+
+          state.bufferSourceNode = source;
+          state.fileStartContextTime = ctx.currentTime - state.fileOffset;
+          source.start(0, state.fileOffset);
+
+          state.isPlayingFile = true;
+          state.isPausedFile = false;
+
+          dom.playFileBtn.disabled = true;
+          dom.pauseFileBtn.disabled = false;
+          dom.stopFileBtn.disabled = false;
+
+          updateStudioEngineStatus();
+          startSeekTracking();
+          ensureVisualizerLoop();
+          setBanner(dom.fileStatusBanner, 'กำลังเล่น "' + (state.currentFile ? state.currentFile.name : 'ไฟล์เสียง') + '"', '');
+        } catch (err) {
+          setBanner(dom.fileStatusBanner, 'เกิดข้อผิดพลาดในการเริ่มเล่นเสียง: ' + err.message, 'error');
+        }
+      }
+
+      function pauseFile() {
+        if (!state.isPlayingFile || !state.audioCtx || !state.audioBuffer) return;
+        state.fileOffset = Math.min(
+          state.audioBuffer.duration,
+          Math.max(0, state.audioCtx.currentTime - state.fileStartContextTime)
+        );
+        cleanupBufferSourceNode();
+        state.isPlayingFile = false;
+        state.isPausedFile = true;
+
+        dom.playFileBtn.disabled = false;
+        dom.pauseFileBtn.disabled = true;
+        dom.stopFileBtn.disabled = false;
+        updateStudioEngineStatus();
+        ensureVisualizerLoop();
+        setBanner(dom.fileStatusBanner, 'พักการเล่นที่เวลา ' + formatSeconds(state.fileOffset), '');
+      }
+
+      function stopFile() {
+        cleanupBufferSourceNode();
+        state.isPlayingFile = false;
+        state.isPausedFile = false;
+        state.fileOffset = 0;
+        state.lastDryFreq = null;
+        state.lastWetFreq = null;
+        state.lastDryTime = null;
+        state.lastWetTime = null;
+
+        dom.elapsedTimeDisplay.textContent = '00:00';
+        dom.seekSlider.value = '0';
+        dom.playFileBtn.disabled = !state.audioBuffer;
+        dom.pauseFileBtn.disabled = true;
+        dom.stopFileBtn.disabled = true;
+
+        updateStudioEngineStatus();
+        ensureVisualizerLoop();
+      }
+
+      function seekFile(sliderNormalizedValue) {
+        if (!state.audioBuffer) return;
+        const ratio = Math.min(1, Math.max(0, Number(sliderNormalizedValue) / 1000));
+        const newOffset = ratio * state.audioBuffer.duration;
+        state.fileOffset = newOffset;
+        dom.elapsedTimeDisplay.textContent = formatSeconds(newOffset);
+
+        if (state.isPlayingFile) {
+          playFile();
+        } else {
+          ensureVisualizerLoop();
+        }
+      }
+
+      function startSeekTracking() {
+        if (state.seekRafId) cancelAnimationFrame(state.seekRafId);
+
+        function tick() {
+          if (!state.isPlayingFile || !state.audioBuffer || !state.audioCtx) return;
+          const elapsed = Math.min(
+            state.audioBuffer.duration,
+            Math.max(0, state.audioCtx.currentTime - state.fileStartContextTime)
+          );
+          state.fileOffset = elapsed;
+          dom.elapsedTimeDisplay.textContent = formatSeconds(elapsed);
+          if (state.audioBuffer.duration > 0) {
+            dom.seekSlider.value = String(Math.round((elapsed / state.audioBuffer.duration) * 1000));
+          }
+          state.seekRafId = requestAnimationFrame(tick);
+        }
+
+        state.seekRafId = requestAnimationFrame(tick);
+      }
+
+      function encodeAudioBufferToWavBlob(renderedBuffer) {
+        const numChannels = Math.min(2, renderedBuffer.numberOfChannels);
+        const sampleRate = renderedBuffer.sampleRate;
+        const numFrames = renderedBuffer.length;
+        const bytesPerSample = 2;
+        const blockAlign = numChannels * bytesPerSample;
+        const dataByteLength = numFrames * blockAlign;
+        const buffer = new ArrayBuffer(44 + dataByteLength);
+        const view = new DataView(buffer);
+
+        function writeAscii(offset, text) {
+          for (let i = 0; i < text.length; i++) {
+            view.setUint8(offset + i, text.charCodeAt(i));
+          }
+        }
+
+        writeAscii(0, 'RIFF');
+        view.setUint32(4, 36 + dataByteLength, true);
+        writeAscii(8, 'WAVE');
+        writeAscii(12, 'fmt ');
+        view.setUint32(16, 16, true);
+        view.setUint16(20, 1, true);
+        view.setUint16(22, numChannels, true);
+        view.setUint32(24, sampleRate, true);
+        view.setUint32(28, sampleRate * blockAlign, true);
+        view.setUint16(32, blockAlign, true);
+        view.setUint16(34, 16, true);
+        writeAscii(36, 'data');
+        view.setUint32(40, dataByteLength, true);
+
+        const channels = [];
+        for (let c = 0; c < numChannels; c++) {
+          channels.push(renderedBuffer.getChannelData(c));
+        }
+
+        let offset = 44;
+        for (let i = 0; i < numFrames; i++) {
+          for (let c = 0; c < numChannels; c++) {
+            const sample = Math.max(-1, Math.min(1, channels[c][i]));
+            view.setInt16(offset, sample < 0 ? sample * 0x8000 : sample * 0x7FFF, true);
+            offset += 2;
+          }
+        }
+
+        return new Blob([buffer], { type: 'audio/wav' });
+      }
+
+      async function exportProcessedFile() {
+        if (!state.audioBuffer || state.isExporting) return;
+
+        const OfflineCtx = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+        if (!OfflineCtx) {
+          setBanner(dom.fileStatusBanner, 'เบราว์เซอร์นี้ไม่รองรับ OfflineAudioContext สำหรับส่งออกไฟล์ WAV', 'error');
+          return;
+        }
+
+        state.isExporting = true;
+        dom.exportWavBtn.disabled = true;
+        setBanner(dom.fileStatusBanner, 'กำลังประมวลผลและเรนเดอร์ไฟล์ WAV ด้วย OfflineAudioContext...', '');
+
+        try {
+          const duration = state.audioBuffer.duration;
+          const sampleRate = state.audioBuffer.sampleRate;
+          const totalFrames = Math.ceil(duration * sampleRate);
+          const offlineCtx = new OfflineCtx(2, totalFrames, sampleRate);
+
+          const offlineMaster = offlineCtx.createGain();
+          const effectiveMaster = state.isMuted ? 0 : state.masterVolume;
+          offlineMaster.gain.value = effectiveMaster;
+
+          const offlineLimiter = offlineCtx.createDynamicsCompressor();
+          offlineLimiter.threshold.value = -6;
+          offlineLimiter.knee.value = 12;
+          offlineLimiter.ratio.value = 6;
+          offlineMaster.connect(offlineLimiter);
+          offlineLimiter.connect(offlineCtx.destination);
+
+          const offlineSource = offlineCtx.createBufferSource();
+          offlineSource.buffer = state.audioBuffer;
+          const offlineSourceGain = offlineCtx.createGain();
+          offlineSourceGain.gain.value = state.sourceVolume;
+          offlineSource.connect(offlineSourceGain);
+          offlineSourceGain.connect(offlineMaster);
+          offlineSource.start(0);
+
+          if (state.ambienceEnabled && state.ambienceVolume > 0) {
+            const offlineAmbGain = offlineCtx.createGain();
+            offlineAmbGain.gain.setValueAtTime(0, 0);
+            offlineAmbGain.gain.linearRampToValueAtTime(state.ambienceVolume, Math.min(0.4, duration * 0.1));
+            if (duration > 0.8) {
+              offlineAmbGain.gain.setValueAtTime(state.ambienceVolume, duration - 0.4);
+              offlineAmbGain.gain.linearRampToValueAtTime(0, duration);
+            }
+            offlineAmbGain.connect(offlineMaster);
+
+            const offlineNoise = createWarmNoiseBuffer(offlineCtx);
+            createPresetGeneratorGraph(
+              offlineCtx,
+              offlineNoise,
+              state.currentPreset,
+              state.breathCycleSec,
+              offlineAmbGain
+            );
+          }
+
+          const renderedBuffer = await offlineCtx.startRendering();
+          const wavBlob = encodeAudioBufferToWavBlob(renderedBuffer);
+          const downloadUrl = URL.createObjectURL(wavBlob);
+
+          const baseName = state.currentFile
+            ? state.currentFile.name.replace(/\.[^/.]+$/, '')
+            : 'sattha-audio';
+          const presetSuffix = state.ambienceEnabled ? '-' + state.currentPreset : '-clean';
+          const outFilename = baseName + presetSuffix + '-sattha.wav';
+
+          const a = document.createElement('a');
+          a.href = downloadUrl;
+          a.download = outFilename;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+
+          setTimeout(function () {
+            URL.revokeObjectURL(downloadUrl);
+          }, 15000);
+
+          setBanner(
+            dom.fileStatusBanner,
+            'ส่งออกไฟล์สำเร็จ: ' + outFilename + ' (' + formatBytes(wavBlob.size) + ', WAV 16-bit PCM)',
+            'success'
+          );
+        } catch (err) {
+          setBanner(dom.fileStatusBanner, 'ไม่สามารถส่งออกไฟล์ WAV ได้: ' + err.message, 'error');
+        } finally {
+          state.isExporting = false;
+          dom.exportWavBtn.disabled = !state.audioBuffer;
+        }
+      }
+
+      // =========================================================================
+      // Live Microphone Pipeline & Processed Output Recording
+      // =========================================================================
+      async function refreshInputDevices() {
+        if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
+          setBanner(dom.micStatusBanner, 'เบราว์เซอร์นี้ไม่รองรับการค้นหารายชื่ออุปกรณ์รับเสียง', 'error');
+          return;
+        }
+
+        try {
+          const devices = await navigator.mediaDevices.enumerateDevices();
+          const audioInputs = devices.filter(function (d) { return d.kind === 'audioinput'; });
+
+          dom.micDeviceSelect.innerHTML = '';
+
+          if (audioInputs.length === 0) {
+            const opt = document.createElement('option');
+            opt.value = '';
+            opt.textContent = 'ไม่พบอุปกรณ์ไมโครโฟนในระบบ';
+            dom.micDeviceSelect.appendChild(opt);
+            return;
+          }
+
+          audioInputs.forEach(function (dev, idx) {
+            const opt = document.createElement('option');
+            opt.value = dev.deviceId;
+            opt.textContent = dev.label || ('ไมโครโฟน #' + (idx + 1) + ' (อนุญาตสิทธิ์เพื่อดูชื่อเต็ม)');
+            dom.micDeviceSelect.appendChild(opt);
+          });
+
+          if (state.selectedDeviceId && audioInputs.some(function (d) { return d.deviceId === state.selectedDeviceId; })) {
+            dom.micDeviceSelect.value = state.selectedDeviceId;
+          } else {
+            state.selectedDeviceId = dom.micDeviceSelect.value;
+          }
+        } catch (err) {
+          setBanner(dom.micStatusBanner, 'ไม่สามารถอ่านรายการอุปกรณ์ไมโครโฟนได้: ' + err.message, 'error');
+        }
+      }
+
+      async function selectInputDevice(deviceId) {
+        state.selectedDeviceId = deviceId;
+        if (state.micStream) {
+          await startMicrophone();
+        }
+      }
+
+      async function startMicrophone() {
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+          setBanner(dom.micStatusBanner, 'เบราว์เซอร์ของคุณไม่รองรับการเข้าถึงไมโครโฟน (getUserMedia)', 'error');
+          return;
+        }
+
+        if (state.micStream) {
+          stopMicrophone(true);
+        }
+
+        setBanner(dom.micStatusBanner, 'กำลังขอสิทธิ์เข้าถึงไมโครโฟนจากเบราว์เซอร์...', '');
+        dom.startMicBtn.disabled = true;
+
+        try {
+          const ctx = await initAudioContext();
+
+          const audioConstraints = {
+            echoCancellation: false,
+            noiseSuppression: false,
+            autoGainControl: false
+          };
+          if (state.selectedDeviceId) {
+            audioConstraints.deviceId = { exact: state.selectedDeviceId };
+          }
+
+          let stream;
+          try {
+            stream = await navigator.mediaDevices.getUserMedia({ audio: audioConstraints, video: false });
+          } catch (constraintErr) {
+            if (state.selectedDeviceId && (constraintErr.name === 'OverconstrainedError' || constraintErr.name === 'NotFoundError')) {
+              stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+            } else {
+              throw constraintErr;
+            }
+          }
+
+          state.micStream = stream;
+
+          await refreshInputDevices();
+
+          const activeTrack = stream.getAudioTracks()[0];
+          if (activeTrack) {
+            const settings = activeTrack.getSettings ? activeTrack.getSettings() : {};
+            if (settings.deviceId) {
+              state.selectedDeviceId = settings.deviceId;
+              dom.micDeviceSelect.value = settings.deviceId;
+            }
+            activeTrack.addEventListener('ended', function () {
+              stopMicrophone();
+              setBanner(dom.micStatusBanner, 'อุปกรณ์ไมโครโฟนถูกตัดการเชื่อมต่อ ระบบหยุดรับเสียงแล้ว', 'error');
+            });
+          }
+
+          state.micSourceNode = ctx.createMediaStreamSource(stream);
+          state.micSourceNode.connect(state.dryTapGain);
+          state.micSourceNode.connect(state.sourceGain);
+
+          if (typeof ctx.createMediaStreamDestination === 'function') {
+            state.micRecordDest = ctx.createMediaStreamDestination();
+            state.compressor.connect(state.micRecordDest);
+          }
+
+          dom.micActiveBadge.setAttribute('data-active', 'true');
+          dom.micActiveText.textContent = 'ไมโครโฟนกำลังทำงาน (LIVE)';
+          dom.startMicBtn.disabled = true;
+          dom.stopMicBtn.disabled = false;
+
+          const canRecord = Boolean(window.MediaRecorder && state.micRecordDest);
+          dom.startRecBtn.disabled = !canRecord;
+          dom.recTimerBadge.textContent = canRecord
+            ? 'พร้อมบันทึกเสียงที่ผสานแล้ว'
+            : 'เบราว์เซอร์นี้ไม่รองรับ MediaRecorder';
+
+          updateStudioEngineStatus();
+          ensureVisualizerLoop();
+          setBanner(
+            dom.micStatusBanner,
+            'ไมโครโฟนทำงานอยู่ กำลังมอนิเตอร์เสียงสดผ่าน Web Audio API (แนะนำให้สวมหูฟังเพื่อป้องกันเสียงหอน)',
+            'success'
+          );
+        } catch (err) {
+          dom.startMicBtn.disabled = false;
+          dom.stopMicBtn.disabled = true;
+          let msg = 'ไม่สามารถเปิดไมโครโฟนได้: ' + err.message;
+          if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
+            msg = 'สิทธิ์การใช้ไมโครโฟนถูกปฏิเสธ กรุณาอนุญาตไมโครโฟนในการตั้งค่าเบราว์เซอร์แล้วลองใหม่';
+          } else if (err.name === 'NotFoundError' || err.name === 'DevicesNotFoundError') {
+            msg = 'ไม่พบไมโครโฟนในอุปกรณ์ของคุณ กรุณาเชื่อมต่อไมโครโฟนแล้วกดรีเฟรชอุปกรณ์';
+          }
+          setBanner(dom.micStatusBanner, msg, 'error');
+        }
+      }
+
+      function stopMicrophone(silentBanner) {
+        if (state.mediaRecorder && state.mediaRecorder.state !== 'inactive') {
+          stopLiveRecording();
+        }
+
+        if (state.micSourceNode) {
+          try { state.micSourceNode.disconnect(); } catch (_) { /* ignore */ }
+          state.micSourceNode = null;
+        }
+
+        if (state.micRecordDest && state.compressor) {
+          try { state.compressor.disconnect(state.micRecordDest); } catch (_) { /* ignore */ }
+          state.micRecordDest = null;
+        }
+
+        if (state.micStream) {
+          state.micStream.getTracks().forEach(function (track) {
+            try { track.stop(); } catch (_) { /* ignore */ }
+          });
+          state.micStream = null;
+        }
+
+        dom.micActiveBadge.setAttribute('data-active', 'false');
+        dom.micActiveText.textContent = 'ไมโครโฟนปิดอยู่';
+        dom.startMicBtn.disabled = false;
+        dom.stopMicBtn.disabled = true;
+        dom.startRecBtn.disabled = true;
+        dom.stopRecBtn.disabled = true;
+
+        updateStudioEngineStatus();
+        ensureVisualizerLoop();
+
+        if (!silentBanner) {
+          setBanner(dom.micStatusBanner, 'หยุดไมโครโฟนและคืนทรัพยากรเสียงให้ระบบเรียบร้อยแล้ว', '');
+        }
+      }
+
+      function detectSupportedRecorderMime() {
+        if (!window.MediaRecorder || typeof MediaRecorder.isTypeSupported !== 'function') {
+          return '';
+        }
+        const candidates = [
+          'audio/webm;codecs=opus',
+          'audio/webm',
+          'audio/ogg;codecs=opus',
+          'audio/mp4'
+        ];
+        for (let i = 0; i < candidates.length; i++) {
+          if (MediaRecorder.isTypeSupported(candidates[i])) {
+            return candidates[i];
+          }
+        }
+        return '';
+      }
+
+      function startLiveRecording() {
+        if (!state.micStream || !state.micRecordDest || !window.MediaRecorder) {
+          setBanner(dom.micStatusBanner, 'ไม่สามารถเริ่มบันทึกได้ กรุณาเริ่มไมโครโฟนก่อนหรือตรวจสอบการรองรับของเบราว์เซอร์', 'error');
+          return;
+        }
+
+        state.recordedChunks = [];
+        state.recordedBlob = null;
+        dom.downloadRecBtn.disabled = true;
+
+        const mimeType = detectSupportedRecorderMime();
+        const options = mimeType ? { mimeType: mimeType } : undefined;
+
+        try {
+          const recorder = new MediaRecorder(state.micRecordDest.stream, options);
+          state.mediaRecorder = recorder;
+          state.recordedMimeType = recorder.mimeType || mimeType || 'audio/webm';
+
+          recorder.ondataavailable = function (ev) {
+            if (ev.data && ev.data.size > 0) {
+              state.recordedChunks.push(ev.data);
+            }
+          };
+
+          recorder.onstop = function () {
+            if (state.recTimerInterval) {
+              clearInterval(state.recTimerInterval);
+              state.recTimerInterval = null;
+            }
+            dom.recTimerBadge.setAttribute('data-recording', 'false');
+
+            if (state.recordedChunks.length === 0) {
+              dom.recTimerBadge.textContent = 'ไม่มีข้อมูลเสียงที่บันทึก';
+              return;
+            }
+
+            const finalBlob = new Blob(state.recordedChunks, { type: state.recordedMimeType });
+            state.recordedBlob = finalBlob;
+
+            const shortFormat = formatMimeLabel(state.recordedMimeType);
+            dom.recTimerBadge.textContent =
+              'บันทึกเสร็จสิ้น · ' + shortFormat + ' (' + formatBytes(finalBlob.size) + ')';
+            dom.downloadRecBtn.textContent = 'ดาวน์โหลดไฟล์บันทึก (' + shortFormat + ')';
+            dom.downloadRecBtn.disabled = false;
+
+            setBanner(
+              dom.micStatusBanner,
+              'บันทึกเสียงที่ผสานแล้วเสร็จสมบูรณ์ รูปแบบจริง: ' + state.recordedMimeType + ' (' + formatBytes(finalBlob.size) + ')',
+              'success'
+            );
+          };
+
+          recorder.start(250);
+          state.recStartTime = Date.now();
+          dom.startRecBtn.disabled = true;
+          dom.stopRecBtn.disabled = false;
+          dom.recTimerBadge.setAttribute('data-recording', 'true');
+          dom.recTimerBadge.textContent = 'REC 00:00';
+
+          state.recTimerInterval = setInterval(function () {
+            const sec = (Date.now() - state.recStartTime) / 1000;
+            dom.recTimerBadge.textContent = 'REC ' + formatSeconds(sec);
+          }, 500);
+
+          setBanner(dom.micStatusBanner, 'กำลังบันทึกเสียงสดพร้อมชั้นเสียงบรรยากาศที่เลือก...', '');
+        } catch (err) {
+          setBanner(dom.micStatusBanner, 'เริ่มบันทึกเสียงไม่สำเร็จ: ' + err.message, 'error');
+        }
+      }
+
+      function stopLiveRecording() {
+        if (state.mediaRecorder && state.mediaRecorder.state !== 'inactive') {
+          try {
+            state.mediaRecorder.stop();
+          } catch (_) { /* ignore */ }
+        }
+        dom.startRecBtn.disabled = !state.micStream;
+        dom.stopRecBtn.disabled = true;
+      }
+
+      function formatMimeLabel(mime) {
+        const lower = (mime || '').toLowerCase();
+        if (lower.includes('webm') && lower.includes('opus')) return 'WebM/Opus';
+        if (lower.includes('webm')) return 'WebM';
+        if (lower.includes('ogg')) return 'OGG/Opus';
+        if (lower.includes('mp4')) return 'MP4/AAC';
+        return 'Audio';
+      }
+
+      function extensionForMime(mime) {
+        const lower = (mime || '').toLowerCase();
+        if (lower.includes('ogg')) return 'ogg';
+        if (lower.includes('mp4')) return 'm4a';
+        return 'webm';
+      }
+
+      function downloadRecordedLiveMix() {
+        if (!state.recordedBlob) return;
+        const ext = extensionForMime(state.recordedMimeType);
+        const filename = 'sattha-live-mix-' + state.currentPreset + '.' + ext;
+        const url = URL.createObjectURL(state.recordedBlob);
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+
+        setTimeout(function () {
+          URL.revokeObjectURL(url);
+        }, 15000);
+      }
+
+      // =========================================================================
+      // Mixer Levels & Presets Control
+      // =========================================================================
+      function setSourceVolume(value) {
+        const normalized = Math.min(1, Math.max(0, Number(value) / 100));
+        state.sourceVolume = normalized;
+        dom.sourceVolVal.textContent = Math.round(normalized * 100) + '%';
+        if (state.audioCtx && state.sourceGain) {
+          state.sourceGain.gain.setTargetAtTime(normalized, state.audioCtx.currentTime, 0.04);
+        }
+        updateComparisonHeaders();
+        if (!state.visualizerRafId) drawComparisonSnapshot();
+      }
+
+      function setAmbienceVolume(value) {
+        const normalized = Math.min(0.6, Math.max(0, Number(value) / 100));
+        state.ambienceVolume = normalized;
+        dom.ambienceVolVal.textContent = Math.round(normalized * 100) + '%';
+        if (state.ambienceEnabled && state.audioCtx && state.ambienceGain) {
+          rampAmbienceGain(normalized);
+        }
+        updateComparisonHeaders();
+        if (!state.visualizerRafId) drawComparisonSnapshot();
+      }
+
+      function setMasterVolume(value) {
+        const normalized = Math.min(1, Math.max(0, Number(value) / 100));
+        state.masterVolume = normalized;
+        dom.masterVolVal.textContent = Math.round(normalized * 100) + '%';
+        if (!state.isMuted && state.audioCtx && state.masterGain) {
+          state.masterGain.gain.setTargetAtTime(normalized, state.audioCtx.currentTime, 0.04);
+        }
+        updateComparisonHeaders();
+        if (!state.visualizerRafId) drawComparisonSnapshot();
+      }
+
+      function toggleMasterMute() {
+        state.isMuted = !state.isMuted;
+        dom.muteMasterBtn.setAttribute('aria-pressed', String(state.isMuted));
+        dom.muteMasterBtn.textContent = state.isMuted ? 'เปิดเสียงรวม (Unmute)' : 'ปิดเสียงรวม (Mute)';
+        if (state.audioCtx && state.masterGain) {
+          const target = state.isMuted ? 0 : state.masterVolume;
+          state.masterGain.gain.setTargetAtTime(target, state.audioCtx.currentTime, 0.03);
+        }
+        updateStudioEngineStatus();
+        if (!state.visualizerRafId) drawComparisonSnapshot();
+      }
+
+      async function toggleAmbienceLayer() {
+        state.ambienceEnabled = !state.ambienceEnabled;
+        dom.ambienceToggleBtn.setAttribute('aria-checked', String(state.ambienceEnabled));
+
+        if (state.ambienceEnabled) {
+          try {
+            await initAudioContext();
+            rebuildLiveAmbienceNodes();
+            rampAmbienceGain(state.ambienceVolume);
+          } catch (err) {
+            state.ambienceEnabled = false;
+            dom.ambienceToggleBtn.setAttribute('aria-checked', 'false');
+            setBanner(dom.fileStatusBanner, 'ไม่สามารถเปิดชั้นเสียงบรรยากาศได้: ' + err.message, 'error');
+          }
+        } else {
+          rampAmbienceGain(0);
+          if (state.ambienceNodes) {
+            state.ambienceNodes.stopAndDisconnect();
+            state.ambienceNodes = null;
+          }
+        }
+
+        updateStudioEngineStatus();
+        ensureVisualizerLoop();
+      }
+
+      function setSoundPreset(preset) {
+        if (!SOUND_PRESETS[preset]) return;
+        state.currentPreset = preset;
+
+        dom.presetCards.forEach(function (card) {
+          const isMatch = card.getAttribute('data-preset') === preset;
+          card.setAttribute('aria-checked', String(isMatch));
+        });
+
+        dom.presetBehaviorInfo.innerHTML =
+          '<strong>' + SOUND_PRESETS[preset].behaviorText.split(':')[0] + ':</strong>' +
+          SOUND_PRESETS[preset].behaviorText.slice(SOUND_PRESETS[preset].behaviorText.indexOf(':') + 1);
+
+        if (preset === 'breath') {
+          dom.breathGuideBox.classList.remove('breath-guide-hidden');
+          startBreathGuideAnimation();
+        } else {
+          dom.breathGuideBox.classList.add('breath-guide-hidden');
+          stopBreathGuideAnimation();
+        }
+
+        if (state.ambienceEnabled && state.audioCtx) {
+          rebuildLiveAmbienceNodes();
+          rampAmbienceGain(state.ambienceVolume);
+        }
+        updateStudioEngineStatus();
+        if (!state.visualizerRafId) drawComparisonSnapshot();
+      }
+
+      // =========================================================================
+      // Resonant Breath Visual Guide
+      // =========================================================================
+      function startBreathGuideAnimation() {
+        if (state.breathRafId) cancelAnimationFrame(state.breathRafId);
+        state.breathLastTs = performance.now();
+
+        function step(now) {
+          if (state.currentPreset !== 'breath') return;
+          const dt = Math.min(0.1, (now - state.breathLastTs) / 1000);
+          state.breathLastTs = now;
+
+          if (!state.breathPaused && !document.hidden) {
+            state.breathPhaseElapsed = (state.breathPhaseElapsed + dt) % state.breathCycleSec;
+            const progress = state.breathPhaseElapsed / state.breathCycleSec;
+            const wave = 0.5 - 0.5 * Math.cos(progress * Math.PI * 2);
+            const isInhale = progress < 0.5;
+
+            dom.breathPhaseText.textContent = isInhale
+              ? 'หายใจเข้าอย่างช้าๆ ตามความสบาย'
+              : 'ผ่อนลมหายใจออกอย่างนุ่มนวล';
+
+            if (!state.prefersReducedMotion) {
+              const scale = 0.78 + wave * 0.78;
+              dom.breathCueCircle.style.transform = 'scale(' + scale.toFixed(3) + ')';
+            } else {
+              dom.breathCueCircle.style.transform = 'scale(1)';
+            }
+          }
+
+          state.breathRafId = requestAnimationFrame(step);
+        }
+
+        state.breathRafId = requestAnimationFrame(step);
+      }
+
+      function stopBreathGuideAnimation() {
+        if (state.breathRafId) {
+          cancelAnimationFrame(state.breathRafId);
+          state.breathRafId = null;
+        }
+      }
+
+      // =========================================================================
+      // Dual-Canvas Audio Comparison Engine (Original vs New Mix)
+      // =========================================================================
+      const FREQ_MIN = 35;
+      const FREQ_MAX = 16000;
+
+      function freqToNormX(freq) {
+        const clamped = Math.max(FREQ_MIN, Math.min(FREQ_MAX, freq));
+        return Math.log(clamped / FREQ_MIN) / Math.log(FREQ_MAX / FREQ_MIN);
+      }
+
+      function normXToFreq(t) {
+        return FREQ_MIN * Math.pow(FREQ_MAX / FREQ_MIN, Math.max(0, Math.min(1, t)));
+      }
+
+      function computeBufferPeaks(audioBuffer, bucketCount) {
+        const count = bucketCount || 180;
+        const peaks = new Float32Array(count);
+        const totalSamples = audioBuffer.length;
+        if (!totalSamples) return peaks;
+
+        const numCh = audioBuffer.numberOfChannels;
+        const ch0 = audioBuffer.getChannelData(0);
+        const ch1 = numCh > 1 ? audioBuffer.getChannelData(1) : null;
+        const blockSize = Math.max(1, Math.floor(totalSamples / count));
+        const stride = Math.max(1, Math.floor(blockSize / 64));
+
+        let globalMax = 0.001;
+        for (let i = 0; i < count; i++) {
+          const start = i * blockSize;
+          const end = Math.min(totalSamples, start + blockSize);
+          let maxAbs = 0;
+          for (let s = start; s < end; s += stride) {
+            const v = ch1 ? 0.5 * (Math.abs(ch0[s]) + Math.abs(ch1[s])) : Math.abs(ch0[s]);
+            if (v > maxAbs) maxAbs = v;
+          }
+          peaks[i] = maxAbs;
+          if (maxAbs > globalMax) globalMax = maxAbs;
+        }
+
+        const normScale = globalMax > 0.98 ? (1 / globalMax) : 1;
+        for (let i = 0; i < count; i++) {
+          peaks[i] = Math.min(1, peaks[i] * normScale);
+        }
+        return peaks;
+      }
+
+      function computeBufferSpectrumOverview(audioBuffer) {
+        const numBands = 56;
+        const freqs = new Float32Array(numBands);
+        const mags = new Float32Array(numBands);
+        for (let b = 0; b < numBands; b++) {
+          freqs[b] = normXToFreq(b / (numBands - 1));
+        }
+
+        const total = audioBuffer.length;
+        const sr = audioBuffer.sampleRate || 44100;
+        const winSize = 1024;
+        if (total < winSize) return { freqs: freqs, mags: mags };
+
+        const ch0 = audioBuffer.getChannelData(0);
+        const windows = 10;
+        const step = Math.max(1, Math.floor((total - winSize) / windows));
+
+        for (let b = 0; b < numBands; b++) {
+          const targetFreq = freqs[b];
+          if (targetFreq >= sr * 0.48) {
+            mags[b] = 0;
+            continue;
+          }
+          const omega = (2 * Math.PI * targetFreq) / sr;
+          const coeff = 2 * Math.cos(omega);
+          let accumMag = 0;
+
+          for (let w = 0; w < windows; w++) {
+            const offset = w * step;
+            let s1 = 0;
+            let s2 = 0;
+            for (let n = 0; n < winSize; n++) {
+              const hann = 0.5 * (1 - Math.cos((2 * Math.PI * n) / (winSize - 1)));
+              const s0 = ch0[offset + n] * hann + coeff * s1 - s2;
+              s2 = s1;
+              s1 = s0;
+            }
+            const power = s1 * s1 + s2 * s2 - coeff * s1 * s2;
+            accumMag += Math.sqrt(Math.max(0, power)) / (winSize * 0.25);
+          }
+
+          const avgAmp = accumMag / windows;
+          const db = 20 * Math.log10(Math.max(1e-5, avgAmp));
+          mags[b] = Math.max(0, Math.min(1, (db + 76) / 68));
+        }
+
+        return { freqs: freqs, mags: mags };
+      }
+
+      function ensureSpectrogramBuffers() {
+        const w = 520;
+        const h = 172;
+        if (!state.specLeftCanvas) {
+          state.specLeftCanvas = document.createElement('canvas');
+          state.specLeftCanvas.width = w;
+          state.specLeftCanvas.height = h;
+          state.specRightCanvas = document.createElement('canvas');
+          state.specRightCanvas.width = w;
+          state.specRightCanvas.height = h;
+          clearSpectrogramBuffers();
+        }
+      }
+
+      function clearSpectrogramBuffers() {
+        if (!state.specLeftCanvas || !state.specRightCanvas) return;
+        const lctx = state.specLeftCanvas.getContext('2d');
+        const rctx = state.specRightCanvas.getContext('2d');
+        lctx.fillStyle = '#090B0F';
+        lctx.fillRect(0, 0, state.specLeftCanvas.width, state.specLeftCanvas.height);
+        rctx.fillStyle = '#090B0F';
+        rctx.fillRect(0, 0, state.specRightCanvas.width, state.specRightCanvas.height);
+        state._hasSpecHistory = false;
+      }
+
+      function spectrogramColor(val, isNewMix) {
+        const v = Math.max(0, Math.min(1, val));
+        if (v < 0.06) return '#090B0F';
+        let r, g, b;
+        if (!isNewMix) {
+          if (v < 0.45) {
+            const t = v / 0.45;
+            r = Math.round(9 + t * 48);
+            g = Math.round(11 + t * 56);
+            b = Math.round(15 + t * 68);
+          } else if (v < 0.80) {
+            const t = (v - 0.45) / 0.35;
+            r = Math.round(57 + t * 107);
+            g = Math.round(67 + t * 106);
+            b = Math.round(83 + t * 101);
+          } else {
+            const t = (v - 0.80) / 0.20;
+            r = Math.round(164 + t * 78);
+            g = Math.round(173 + t * 71);
+            b = Math.round(184 + t * 62);
+          }
+        } else {
+          if (v < 0.42) {
+            const t = v / 0.42;
+            r = Math.round(9 + t * 58);
+            g = Math.round(11 + t * 56);
+            b = Math.round(15 + t * 78);
+          } else if (v < 0.78) {
+            const t = (v - 0.42) / 0.36;
+            r = Math.round(67 + t * 102);
+            g = Math.round(67 + t * 132);
+            b = Math.round(93 + t * 108);
+          } else {
+            const t = (v - 0.78) / 0.22;
+            r = Math.round(169 + t * 73);
+            g = Math.round(199 + t * 45);
+            b = Math.round(201 + t * 45);
+          }
+        }
+        return 'rgb(' + r + ',' + g + ',' + b + ')';
+      }
+
+      function sampleFreqArrayAtHz(freqArray, sampleRate, hz) {
+        if (!freqArray || !freqArray.length) return 0;
+        const nyquist = (sampleRate || 44100) / 2;
+        const exactBin = (hz / nyquist) * freqArray.length;
+        const idx = Math.max(0, Math.min(freqArray.length - 1, Math.round(exactBin)));
+        return freqArray[idx] / 255;
+      }
+
+      function pushSpectrogramColumn(dryFreq, wetFreq, sampleRate) {
+        ensureSpectrogramBuffers();
+        const w = state.specLeftCanvas.width;
+        const h = state.specLeftCanvas.height;
+        const stepPx = 2;
+        const bands = 56;
+        const bandH = Math.ceil(h / bands);
+
+        const lctx = state.specLeftCanvas.getContext('2d');
+        const rctx = state.specRightCanvas.getContext('2d');
+
+        lctx.drawImage(state.specLeftCanvas, stepPx, 0, w - stepPx, h, 0, 0, w - stepPx, h);
+        rctx.drawImage(state.specRightCanvas, stepPx, 0, w - stepPx, h, 0, 0, w - stepPx, h);
+
+        for (let b = 0; b < bands; b++) {
+          const normFreq = b / (bands - 1);
+          const hz = 40 * Math.pow(14000 / 40, normFreq);
+          const y = h - Math.round((b + 1) * (h / bands));
+
+          const dryVal = sampleFreqArrayAtHz(dryFreq, sampleRate, hz);
+          const wetVal = sampleFreqArrayAtHz(wetFreq, sampleRate, hz);
+
+          lctx.fillStyle = spectrogramColor(dryVal, false);
+          lctx.fillRect(w - stepPx, y, stepPx, bandH + 1);
+
+          rctx.fillStyle = spectrogramColor(wetVal, true);
+          rctx.fillRect(w - stepPx, y, stepPx, bandH + 1);
+        }
+        state._hasSpecHistory = true;
+      }
+
+      function syncCanvasSurface(canvas) {
+        if (!canvas) return null;
+        const rect = canvas.getBoundingClientRect();
+        const cssW = Math.max(200, Math.round(rect.width || 520));
+        const cssH = Math.max(120, Math.round(rect.height || 172));
+        const dpr = Math.min(2, window.devicePixelRatio || 1);
+        const targetW = Math.round(cssW * dpr);
+        const targetH = Math.round(cssH * dpr);
+
+        if (canvas.width !== targetW || canvas.height !== targetH) {
+          canvas.width = targetW;
+          canvas.height = targetH;
+        }
+
+        const ctx = canvas.getContext('2d');
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.clearRect(0, 0, cssW, cssH);
+        return { ctx: ctx, w: cssW, h: cssH };
+      }
+
+      function drawSubtleGrid(ctx, w, h, padBottom) {
+        const plotH = h - (padBottom || 0);
+        ctx.strokeStyle = 'rgba(220, 230, 240, 0.05)';
+        ctx.lineWidth = 1;
+        for (let r = 1; r <= 3; r++) {
+          const y = Math.round((plotH * r) / 4) + 0.5;
+          ctx.beginPath();
+          ctx.moveTo(0, y);
+          ctx.lineTo(w, y);
+          ctx.stroke();
+        }
+      }
+
+      function renderFrequencyComparison(leftS, rightS, dryFreq, wetFreq, sampleRate) {
+        const padB = 20;
+        const padT = 16;
+        const ticks = [
+          { hz: 60, label: '60Hz' },
+          { hz: 150, label: '150Hz' },
+          { hz: 400, label: '400Hz' },
+          { hz: 1000, label: '1k' },
+          { hz: 4000, label: '4k' },
+          { hz: 12000, label: '12k' }
+        ];
+
+        function drawAxis(s) {
+          drawSubtleGrid(s.ctx, s.w, s.h, padB);
+          s.ctx.font = '10px Inter, system-ui, sans-serif';
+          s.ctx.fillStyle = '#707B88';
+          s.ctx.textAlign = 'center';
+          for (let i = 0; i < ticks.length; i++) {
+            const x = Math.round(freqToNormX(ticks[i].hz) * (s.w - 20)) + 10;
+            s.ctx.strokeStyle = 'rgba(220, 230, 240, 0.04)';
+            s.ctx.beginPath();
+            s.ctx.moveTo(x + 0.5, 0);
+            s.ctx.lineTo(x + 0.5, s.h - padB);
+            s.ctx.stroke();
+            s.ctx.fillText(ticks[i].label, x, s.h - 6);
+          }
+        }
+
+        drawAxis(leftS);
+        drawAxis(rightS);
+
+        const points = 72;
+        const dryCurve = new Float32Array(points);
+        const wetCurve = new Float32Array(points);
+        const hasLiveOrPaused = Boolean(dryFreq && wetFreq);
+        const presetCfg = SOUND_PRESETS[state.currentPreset] || SOUND_PRESETS.alpha;
+        const effMaster = state.isMuted ? 0 : state.masterVolume;
+
+        let dryPeakHz = 0;
+        let dryPeakVal = 0;
+        let wetPeakHz = 0;
+        let wetPeakVal = 0;
+
+        for (let i = 0; i < points; i++) {
+          const norm = i / (points - 1);
+          const hz = normXToFreq(norm);
+          let dVal = 0;
+          let wVal = 0;
+
+          if (hasLiveOrPaused) {
+            dVal = sampleFreqArrayAtHz(dryFreq, sampleRate, hz);
+            wVal = sampleFreqArrayAtHz(wetFreq, sampleRate, hz);
+          } else if (state.fileSpectrum) {
+            const specIdx = Math.min(
+              state.fileSpectrum.mags.length - 1,
+              Math.round(norm * (state.fileSpectrum.mags.length - 1))
+            );
+            dVal = state.fileSpectrum.mags[specIdx];
+            wVal = dVal * state.sourceVolume * effMaster;
+
+            if (state.ambienceEnabled && effMaster > 0) {
+              const distCarrier = Math.abs(Math.log2(hz / presetCfg.carrierLeft));
+              const distHarm = Math.abs(Math.log2(hz / presetCfg.harmonicFreq));
+              const carrierBump = Math.exp(-(distCarrier * distCarrier) / 0.012) * 0.72;
+              const harmBump = Math.exp(-(distHarm * distHarm) / 0.015) * 0.24;
+              const lowNoise = hz < presetCfg.filterCutoff ? presetCfg.noiseLevel * 0.9 : 0.01;
+              const ambAdd = (carrierBump + harmBump + lowNoise) * (state.ambienceVolume / 0.30) * effMaster;
+              wVal = Math.min(0.98, Math.hypot(wVal, ambAdd));
+            }
+          }
+
+          dryCurve[i] = dVal;
+          wetCurve[i] = wVal;
+
+          if (dVal > dryPeakVal) {
+            dryPeakVal = dVal;
+            dryPeakHz = hz;
+          }
+          if (wVal > wetPeakVal) {
+            wetPeakVal = wVal;
+            wetPeakHz = hz;
+          }
+        }
+
+        function plotSpectrumArea(s, curve, strokeColor, fillColor, isDashed) {
+          const plotH = s.h - padB - padT;
+          s.ctx.save();
+          if (isDashed) s.ctx.setLineDash([4, 3]);
+          s.ctx.beginPath();
+          for (let i = 0; i < points; i++) {
+            const x = 10 + (i / (points - 1)) * (s.w - 20);
+            const y = s.h - padB - curve[i] * plotH;
+            if (i === 0) s.ctx.moveTo(x, y);
+            else s.ctx.lineTo(x, y);
+          }
+          s.ctx.strokeStyle = strokeColor;
+          s.ctx.lineWidth = isDashed ? 1.2 : 1.7;
+          s.ctx.stroke();
+
+          if (fillColor && !isDashed) {
+            s.ctx.lineTo(s.w - 10, s.h - padB);
+            s.ctx.lineTo(10, s.h - padB);
+            s.ctx.closePath();
+            s.ctx.fillStyle = fillColor;
+            s.ctx.fill();
+          }
+          s.ctx.restore();
+        }
+
+        plotSpectrumArea(leftS, dryCurve, 'rgba(242, 244, 246, 0.80)', 'rgba(164, 173, 184, 0.14)', false);
+        plotSpectrumArea(rightS, dryCurve, 'rgba(164, 173, 184, 0.28)', null, true);
+        plotSpectrumArea(rightS, wetCurve, 'rgba(169, 199, 201, 0.94)', 'rgba(169, 199, 201, 0.18)', false);
+
+        const carrierX = 10 + freqToNormX(presetCfg.carrierLeft) * (rightS.w - 20);
+        rightS.ctx.save();
+        rightS.ctx.strokeStyle = state.ambienceEnabled
+          ? 'rgba(169, 156, 203, 0.68)'
+          : 'rgba(169, 156, 203, 0.25)';
+        rightS.ctx.setLineDash([2, 3]);
+        rightS.ctx.beginPath();
+        rightS.ctx.moveTo(carrierX, padT - 4);
+        rightS.ctx.lineTo(carrierX, rightS.h - padB);
+        rightS.ctx.stroke();
+        rightS.ctx.fillStyle = state.ambienceEnabled ? '#A99CCB' : '#707B88';
+        rightS.ctx.font = '10px Inter, system-ui, sans-serif';
+        rightS.ctx.textAlign = 'left';
+        rightS.ctx.fillText(
+          presetCfg.name + ' ' + Math.round(presetCfg.carrierLeft) + 'Hz',
+          Math.min(rightS.w - 92, carrierX + 4),
+          13
+        );
+        rightS.ctx.restore();
+
+        leftS.ctx.font = '10px Inter, system-ui, sans-serif';
+        leftS.ctx.fillStyle = '#A4ADB8';
+        leftS.ctx.textAlign = 'right';
+        leftS.ctx.fillText(
+          dryPeakVal > 0.03 ? ('Peak ~' + Math.round(dryPeakHz) + ' Hz') : 'รอสัญญาณเสียง',
+          leftS.w - 10,
+          13
+        );
+
+        rightS.ctx.font = '10px Inter, system-ui, sans-serif';
+        rightS.ctx.fillStyle = '#A9C7C9';
+        rightS.ctx.textAlign = 'right';
+        rightS.ctx.fillText(
+          wetPeakVal > 0.03 ? ('Peak ~' + Math.round(wetPeakHz) + ' Hz') : 'รอสัญญาณเสียง',
+          rightS.w - 10,
+          13
+        );
+      }
+
+      function renderSpectrogramComparison(leftS, rightS) {
+        ensureSpectrogramBuffers();
+
+        leftS.ctx.drawImage(state.specLeftCanvas, 0, 0, leftS.w, leftS.h);
+        rightS.ctx.drawImage(state.specRightCanvas, 0, 0, rightS.w, rightS.h);
+
+        const freqLabels = [
+          { hz: 120, text: '120Hz' },
+          { hz: 600, text: '600Hz' },
+          { hz: 2500, text: '2.5k' },
+          { hz: 9000, text: '9k' }
+        ];
+
+        function drawSpecOverlay(s, showPresetBand) {
+          s.ctx.fillStyle = 'rgba(9, 11, 15, 0.62)';
+          s.ctx.fillRect(0, 0, 42, s.h);
+          s.ctx.font = '10px Inter, system-ui, sans-serif';
+          s.ctx.fillStyle = '#A4ADB8';
+          s.ctx.textAlign = 'left';
+
+          for (let i = 0; i < freqLabels.length; i++) {
+            const norm = Math.log(freqLabels[i].hz / 40) / Math.log(14000 / 40);
+            const y = s.h - norm * s.h;
+            s.ctx.fillText(freqLabels[i].text, 5, Math.max(11, Math.min(s.h - 4, y + 3)));
+          }
+
+          if (showPresetBand) {
+            const presetCfg = SOUND_PRESETS[state.currentPreset] || SOUND_PRESETS.alpha;
+            const normC = Math.log(presetCfg.carrierLeft / 40) / Math.log(14000 / 40);
+            const cy = s.h - normC * s.h;
+            s.ctx.strokeStyle = state.ambienceEnabled
+              ? 'rgba(169, 156, 203, 0.75)'
+              : 'rgba(169, 156, 203, 0.30)';
+            s.ctx.lineWidth = 1;
+            s.ctx.beginPath();
+            s.ctx.moveTo(42, cy);
+            s.ctx.lineTo(s.w, cy);
+            s.ctx.stroke();
+
+            s.ctx.fillStyle = state.ambienceEnabled ? '#A99CCB' : '#707B88';
+            s.ctx.textAlign = 'right';
+            s.ctx.fillText(presetCfg.name + ' band', s.w - 8, Math.max(12, cy - 4));
+          }
+
+          if (!state._hasSpecHistory) {
+            s.ctx.fillStyle = '#707B88';
+            s.ctx.font = '12px "Noto Sans Thai", Inter, sans-serif';
+            s.ctx.textAlign = 'center';
+            s.ctx.fillText('กด Play หรือเปิดเสียงเพื่อแสดง Spectrogram ตามเวลาจริง', (s.w + 42) / 2, s.h / 2 + 4);
+          }
+        }
+
+        drawSpecOverlay(leftS, false);
+        drawSpecOverlay(rightS, true);
+      }
+
+      function renderWaveformComparison(leftS, rightS, dryTime, wetTime) {
+        drawSubtleGrid(leftS.ctx, leftS.w, leftS.h, 18);
+        drawSubtleGrid(rightS.ctx, rightS.w, rightS.h, 18);
+
+        if (state.activeTab === 'file' && state.audioBuffer && state.filePeaks) {
+          const peaks = state.filePeaks;
+          const count = peaks.length;
+          const padX = 10;
+          const padB = 18;
+          const midYLeft = (leftS.h - padB) / 2;
+          const midYRight = (rightS.h - padB) / 2;
+          const maxAmpHLeft = (leftS.h - padB) * 0.43;
+          const maxAmpHRight = (rightS.h - padB) * 0.43;
+          const duration = Math.max(0.01, state.audioBuffer.duration);
+          const progress = Math.max(0, Math.min(1, state.fileOffset / duration));
+
+          const presetCfg = SOUND_PRESETS[state.currentPreset] || SOUND_PRESETS.alpha;
+          const modHz = state.currentPreset === 'breath'
+            ? (1 / Math.max(4, state.breathCycleSec))
+            : presetCfg.modRateHz;
+          const effMaster = state.isMuted ? 0 : state.masterVolume;
+
+          const stepL = (leftS.w - padX * 2) / count;
+          const barWL = Math.max(1.2, stepL * 0.66);
+
+          for (let i = 0; i < count; i++) {
+            const ratio = i / count;
+            const x = padX + i * stepL;
+            const hBar = Math.max(1.2, peaks[i] * maxAmpHLeft);
+            leftS.ctx.fillStyle = ratio <= progress
+              ? 'rgba(242, 244, 246, 0.86)'
+              : 'rgba(164, 173, 184, 0.36)';
+            leftS.ctx.fillRect(x, midYLeft - hBar, barWL, hBar * 2);
+          }
+
+          const stepR = (rightS.w - padX * 2) / count;
+          const barWR = Math.max(1.2, stepR * 0.66);
+
+          for (let i = 0; i < count; i++) {
+            const ratio = i / count;
+            const tSec = ratio * duration;
+            const x = padX + i * stepR;
+
+            let ambFloor = 0;
+            if (state.ambienceEnabled && effMaster > 0) {
+              const lfoEnv = 1 - presetCfg.modDepth * 0.5 + presetCfg.modDepth * 0.5 * Math.sin(2 * Math.PI * modHz * tSec);
+              ambFloor = state.ambienceVolume * 0.62 * lfoEnv * effMaster;
+            }
+
+            const rawMix = (peaks[i] * state.sourceVolume + ambFloor) * effMaster;
+            const compressed = rawMix / (1 + 0.32 * rawMix);
+            const hBar = Math.max(1.2, Math.min(1, compressed) * maxAmpHRight);
+
+            if (ambFloor > 0.005) {
+              const hAmb = Math.min(hBar, ambFloor * maxAmpHRight * 1.3);
+              rightS.ctx.fillStyle = 'rgba(169, 156, 203, 0.42)';
+              rightS.ctx.fillRect(x, midYRight - hAmb, barWR, hAmb * 2);
+            }
+
+            rightS.ctx.fillStyle = ratio <= progress
+              ? 'rgba(169, 199, 201, 0.92)'
+              : 'rgba(169, 199, 201, 0.38)';
+            rightS.ctx.fillRect(x, midYRight - hBar, barWR, hBar * 2);
+          }
+
+          function drawPlayheadAndTimes(s, accentColor) {
+            const px = padX + progress * (s.w - padX * 2);
+            s.ctx.strokeStyle = accentColor;
+            s.ctx.lineWidth = 1.5;
+            s.ctx.beginPath();
+            s.ctx.moveTo(px, 4);
+            s.ctx.lineTo(px, s.h - padB);
+            s.ctx.stroke();
+
+            s.ctx.font = '10px Inter, system-ui, sans-serif';
+            s.ctx.fillStyle = '#707B88';
+            s.ctx.textAlign = 'left';
+            s.ctx.fillText(formatSeconds(state.fileOffset), padX, s.h - 5);
+            s.ctx.textAlign = 'right';
+            s.ctx.fillText(formatSeconds(duration), s.w - padX, s.h - 5);
+          }
+
+          drawPlayheadAndTimes(leftS, '#F2F4F6');
+          drawPlayheadAndTimes(rightS, '#A9C7C9');
+          return;
+        }
+
+        renderRealtimeWaveComparison(leftS, rightS, dryTime, wetTime, true);
+      }
+
+      function findRisingZeroCrossing(timeBytes, maxSearch) {
+        if (!timeBytes) return 0;
+        const limit = Math.min(maxSearch || 512, timeBytes.length - 2);
+        for (let i = 1; i < limit; i++) {
+          if (timeBytes[i - 1] < 128 && timeBytes[i] >= 128) {
+            return i;
+          }
+        }
+        return 0;
+      }
+
+      function computeRmsDb(timeBytes) {
+        if (!timeBytes || !timeBytes.length) return -96;
+        let sumSq = 0;
+        for (let i = 0; i < timeBytes.length; i++) {
+          const norm = (timeBytes[i] - 128) / 128;
+          sumSq += norm * norm;
+        }
+        const rms = Math.sqrt(sumSq / timeBytes.length);
+        if (rms < 1e-4) return -80;
+        return Math.max(-80, Math.min(0, 20 * Math.log10(rms)));
+      }
+
+      function renderRealtimeWaveComparison(leftS, rightS, dryTime, wetTime, simpleMode) {
+        drawSubtleGrid(leftS.ctx, leftS.w, leftS.h, 0);
+        drawSubtleGrid(rightS.ctx, rightS.w, rightS.h, 0);
+
+        leftS.ctx.strokeStyle = 'rgba(220, 230, 240, 0.10)';
+        leftS.ctx.beginPath();
+        leftS.ctx.moveTo(0, leftS.h / 2);
+        leftS.ctx.lineTo(leftS.w, leftS.h / 2);
+        leftS.ctx.stroke();
+
+        rightS.ctx.strokeStyle = 'rgba(220, 230, 240, 0.10)';
+        rightS.ctx.beginPath();
+        rightS.ctx.moveTo(0, rightS.h / 2);
+        rightS.ctx.lineTo(rightS.w, rightS.h / 2);
+        rightS.ctx.stroke();
+
+        if (!dryTime || !wetTime) {
+          leftS.ctx.font = '11.5px "Noto Sans Thai", Inter, sans-serif';
+          leftS.ctx.fillStyle = '#707B88';
+          leftS.ctx.textAlign = 'center';
+          leftS.ctx.fillText(
+            simpleMode ? 'อัปโหลดไฟล์เสียงเพื่อดูรูปคลื่นเต็มไฟล์' : 'รอสัญญาณเสียงเรียลไทม์ (กด Play หรือเปิดไมโครโฟน)',
+            leftS.w / 2,
+            leftS.h / 2 - 8
+          );
+          rightS.ctx.font = '11.5px "Noto Sans Thai", Inter, sans-serif';
+          rightS.ctx.fillStyle = '#707B88';
+          rightS.ctx.textAlign = 'center';
+          rightS.ctx.fillText(
+            simpleMode ? 'รูปคลื่นไฟล์เสียงใหม่จะแสดงที่นี่' : 'กด Play หรือเปิด Ambience เพื่อเทียบคลื่นเรียลไทม์',
+            rightS.w / 2,
+            rightS.h / 2 - 8
+          );
+          return;
+        }
+
+        const windowSamples = 768;
+        const triggerOffset = findRisingZeroCrossing(dryTime, 512);
+
+        function drawWaveTrace(s, data, offset, color, lineW, dashed) {
+          s.ctx.save();
+          if (dashed) s.ctx.setLineDash([3, 3]);
+          s.ctx.strokeStyle = color;
+          s.ctx.lineWidth = lineW;
+          s.ctx.beginPath();
+          const avail = Math.min(windowSamples, data.length - offset);
+          for (let i = 0; i < avail; i++) {
+            const x = (i / (avail - 1)) * s.w;
+            const norm = (data[offset + i] - 128) / 128;
+            const y = s.h / 2 - norm * (s.h * 0.40);
+            if (i === 0) s.ctx.moveTo(x, y);
+            else s.ctx.lineTo(x, y);
+          }
+          s.ctx.stroke();
+          s.ctx.restore();
+        }
+
+        drawWaveTrace(leftS, dryTime, triggerOffset, 'rgba(242, 244, 246, 0.86)', 1.6, false);
+
+        if (!simpleMode) {
+          drawWaveTrace(rightS, dryTime, triggerOffset, 'rgba(164, 173, 184, 0.28)', 1.1, true);
+
+          const avail = Math.min(windowSamples, Math.min(dryTime.length, wetTime.length) - triggerOffset);
+          rightS.ctx.strokeStyle = 'rgba(169, 156, 203, 0.65)';
+          rightS.ctx.lineWidth = 1.2;
+          rightS.ctx.beginPath();
+          for (let i = 0; i < avail; i++) {
+            const x = (i / (avail - 1)) * rightS.w;
+            const dNorm = (dryTime[triggerOffset + i] - 128) / 128;
+            const wNorm = (wetTime[triggerOffset + i] - 128) / 128;
+            const diff = wNorm - dNorm;
+            const y = rightS.h / 2 - diff * (rightS.h * 0.40);
+            if (i === 0) rightS.ctx.moveTo(x, y);
+            else rightS.ctx.lineTo(x, y);
+          }
+          rightS.ctx.stroke();
+        }
+
+        drawWaveTrace(rightS, wetTime, triggerOffset, 'rgba(169, 199, 201, 0.94)', 1.7, false);
+
+        const dryDb = computeRmsDb(dryTime);
+        const wetDb = computeRmsDb(wetTime);
+
+        leftS.ctx.font = '10px Inter, system-ui, sans-serif';
+        leftS.ctx.fillStyle = '#A4ADB8';
+        leftS.ctx.textAlign = 'right';
+        leftS.ctx.fillText(dryDb <= -79 ? 'RMS: -∞ dB' : ('RMS: ' + dryDb.toFixed(1) + ' dB'), leftS.w - 10, 14);
+
+        rightS.ctx.font = '10px Inter, system-ui, sans-serif';
+        rightS.ctx.fillStyle = '#A9C7C9';
+        rightS.ctx.textAlign = 'right';
+        rightS.ctx.fillText(wetDb <= -79 ? 'RMS: -∞ dB' : ('RMS: ' + wetDb.toFixed(1) + ' dB'), rightS.w - 10, 14);
+
+        if (!simpleMode) {
+          rightS.ctx.textAlign = 'left';
+          rightS.ctx.fillStyle = '#A9C7C9';
+          rightS.ctx.fillText('● ไฟล์ใหม่', 10, 14);
+          rightS.ctx.fillStyle = '#A4ADB8';
+          rightS.ctx.fillText('┄ ไฟล์เดิม', 66, 14);
+          rightS.ctx.fillStyle = '#A99CCB';
+          rightS.ctx.fillText('● Δ ส่วนต่างคลื่น', 124, 14);
+        }
+      }
+
+      function drawComparisonSnapshot(dryFreq, wetFreq, dryTime, wetTime) {
+        const leftS = syncCanvasSurface(dom.compareCanvasLeft);
+        const rightS = syncCanvasSurface(dom.compareCanvasRight);
+        if (!leftS || !rightS) return;
+
+        const sr = state.audioCtx ? state.audioCtx.sampleRate : (state.audioBuffer ? state.audioBuffer.sampleRate : 44100);
+        const dFreq = dryFreq || state.lastDryFreq;
+        const wFreq = wetFreq || state.lastWetFreq;
+        const dTime = dryTime || state.lastDryTime;
+        const wTime = wetTime || state.lastWetTime;
+
+        if (state.comparisonMode === 'frequency') {
+          renderFrequencyComparison(leftS, rightS, dFreq, wFreq, sr);
+        } else if (state.comparisonMode === 'spectrogram') {
+          renderSpectrogramComparison(leftS, rightS);
+        } else if (state.comparisonMode === 'waveform') {
+          renderWaveformComparison(leftS, rightS, dTime, wTime);
+        } else {
+          renderRealtimeWaveComparison(leftS, rightS, dTime, wTime, false);
+        }
+      }
+
+      function setComparisonMode(mode) {
+        const allowed = ['frequency', 'spectrogram', 'waveform', 'realtime'];
+        if (allowed.indexOf(mode) === -1) return;
+        state.comparisonMode = mode;
+
+        dom.compareModeBtns.forEach(function (btn) {
+          const isMatch = btn.getAttribute('data-comp-mode') === mode;
+          btn.setAttribute('aria-checked', String(isMatch));
+        });
+
+        drawComparisonSnapshot();
+      }
+
+      function ensureVisualizerLoop() {
+        if (state.visualizerRafId) {
+          cancelAnimationFrame(state.visualizerRafId);
+          state.visualizerRafId = null;
+        }
+
+        if (!isAnyAudioActive() || state.prefersReducedMotion || document.hidden || !state.analyser || !state.dryAnalyser) {
+          drawComparisonSnapshot();
+          return;
+        }
+
+        const timeLen = state.analyser.fftSize;
+        const freqLen = state.analyser.frequencyBinCount;
+        const dryTime = new Uint8Array(timeLen);
+        const wetTime = new Uint8Array(timeLen);
+        const dryFreq = new Uint8Array(freqLen);
+        const wetFreq = new Uint8Array(freqLen);
+
+        function renderFrame() {
+          if (!isAnyAudioActive() || state.prefersReducedMotion || document.hidden || !state.analyser || !state.dryAnalyser) {
+            drawComparisonSnapshot();
+            state.visualizerRafId = null;
+            return;
+          }
+
+          state.dryAnalyser.getByteFrequencyData(dryFreq);
+          state.analyser.getByteFrequencyData(wetFreq);
+          state.dryAnalyser.getByteTimeDomainData(dryTime);
+          state.analyser.getByteTimeDomainData(wetTime);
+
+          state.lastDryFreq = new Uint8Array(dryFreq);
+          state.lastWetFreq = new Uint8Array(wetFreq);
+          state.lastDryTime = new Uint8Array(dryTime);
+          state.lastWetTime = new Uint8Array(wetTime);
+
+          pushSpectrogramColumn(dryFreq, wetFreq, state.audioCtx.sampleRate);
+          drawComparisonSnapshot(dryFreq, wetFreq, dryTime, wetTime);
+
+          state.visualizerRafId = requestAnimationFrame(renderFrame);
+        }
+
+        state.visualizerRafId = requestAnimationFrame(renderFrame);
+      }
+
+      // =========================================================================
+      // SATTHA AI Companion (Direct Gemini API with Permanent Default Token)
+      // =========================================================================
+      const SATTHA_SYSTEM_INSTRUCTION =
+        'บทบาทและตัวตน (Role & Persona):\n' +
+        'คุณคือ SATTHA AI ผู้เชี่ยวชาญด้านศาสนาเปรียบเทียบ ปรัชญา และประวัติศาสตร์ความเชื่อ ที่มีสไตล์การพูดแบบ “นักพูดเดี่ยวไมโครโฟนสายวิชาการ” (Edutainment) อธิบายเรื่องศาสนา ความเชื่อ และพิธีกรรมต่าง ๆ ได้อย่างตรงไปตรงมา ไม่อ้อมค้อม โดยพิจารณาหลักฐานทางวิทยาศาสตร์ ประวัติศาสตร์ โบราณคดี และจิตวิทยา\n\n' +
+        'น้ำเสียงและภาษา (Tone & Style):\n' +
+        '- เป็นกันเองและทันสมัย ใช้ภาษาพูดที่ลื่นไหล เข้าถึงง่าย ไม่เหมือนกำลังฟังเทศน์หรืออ่านตำราเรียน\n' +
+        '- กระชับ ตัดคำฟุ่มเฟือย เน้นเนื้อหาที่เข้าใจง่าย\n' +
+        '- สอดแทรกอารมณ์ขันและการเปรียบเทียบที่เห็นภาพชัดเจนเมื่อเหมาะสม\n' +
+        '- ใช้สำนวนไทย คำพังเพย หรือสุภาษิตอย่างเป็นธรรมชาติ ไม่ฝืนใส่ทุกคำตอบ\n' +
+        '- เป็นกลางและให้เกียรติทุกศาสนา ความเชื่อ และผู้ไม่มีศาสนา วิจารณ์แนวคิดได้ตรงไปตรงมาแต่ไม่ดูหมิ่นผู้ศรัทธาหรือเหมารวม\n\n' +
+        'โครงสร้างการตอบ (Response Format):\n' +
+        'เมื่อเหมาะสม ให้จัดคำตอบเป็น 4 ส่วน:\n' +
+        '1. **The Hook — เปิดหัวให้ว้าว:** ประโยคเปิดที่ดึงดูดความสนใจ 1–2 บรรทัด\n' +
+        '2. **The Belief — แก่นความเชื่อ:** อธิบายที่มาและความหมายแบบสั้น กระชับ เข้าใจง่าย\n' +
+        '3. **The Science & Facts — มุมมองวิทยาศาสตร์และหลักฐาน:** ใช้ bullet points (- ) แยกหลักฐานด้านวิทยาศาสตร์ จิตวิทยา ประวัติศาสตร์ หรือโบราณคดี พร้อมระบุข้อจำกัด\n' +
+        '4. **The Punchline — บทสรุปแบบคม ๆ:** สรุปข้อคิด พร้อมมุกเบา ๆ หรือคำพังเพยเมื่อเหมาะสม\n' +
+        '(ไม่จำเป็นต้องใช้ครบทั้ง 4 ส่วนในคำถามง่าย ๆ หรือบทสนทนาสั้น ๆ ให้ตอบคำถามหลักก่อนเสมอ)\n\n' +
+        'ข้อควรระวัง (Constraints):\n' +
+        '- แปลศัพท์บาลี-สันสกฤตหรือศัพท์วิชาการเป็นภาษาทั่วไปเสมอ\n' +
+        '- หากวิทยาศาสตร์ยังพิสูจน์ไม่ได้ ให้ระบุว่าเป็น “ข้อสันนิษฐาน”, “สมมติฐาน”, “ความเชื่อ” หรือ “การตีความ”\n' +
+        '- แยกข้อเท็จจริงที่ตรวจสอบได้ออกจากความเชื่อ ห้ามแต่งชื่อแหล่งอ้างอิง นักวิจัย ปี หรือผลการทดลองขึ้นเอง\n' +
+        '- ไม่วินิจฉัยหรือรักษาปัญหาสุขภาพกายและใจ\n' +
+        '- ไม่กล่าวอ้างว่าเสียง Alpha, Theta, Delta, Gamma หรือ Resonant Breath รักษาโรค ลดความเครียด หรือเปลี่ยนคลื่นสมองได้อย่างแน่นอน\n' +
+        '- ใช้ภาษาไทยเป็นหลัก เว้นแต่ผู้ใช้ต้องการภาษาอื่น';
+
+      function updateTokenPermanentBadge() {
+        if (!dom.tokenPermBadge || !dom.tokenPermText) return;
+        const currentVal = (state.geminiApiKey || '').trim();
+        if (currentVal === DEFAULT_GEMINI_TOKEN) {
+          dom.tokenPermBadge.removeAttribute('data-custom');
+          dom.tokenPermText.textContent = 'ตั้งค่าถาวรแล้ว';
+        } else if (currentVal.length > 0) {
+          dom.tokenPermBadge.setAttribute('data-custom', 'true');
+          dom.tokenPermText.textContent = 'โทเคนกำหนดเอง';
+        } else {
+          dom.tokenPermBadge.setAttribute('data-custom', 'true');
+          dom.tokenPermText.textContent = 'ใช้โทเคนหลักอัตโนมัติ';
+        }
+      }
+
+      function updateGlobalAndChatBadges() {
+        const hasToken = Boolean((state.geminiApiKey && state.geminiApiKey.trim().length > 0) || DEFAULT_GEMINI_TOKEN);
+        updateTokenPermanentBadge();
+
+        if (state.chatMode === 'demo') {
+          dom.globalStatusPill.setAttribute('data-state', 'demo');
+          dom.globalStatusText.textContent = 'LOCAL DEMO';
+          dom.chatConnectionBadge.setAttribute('data-state', 'demo');
+          dom.chatConnectionText.textContent = 'DEMO MODE · คำตอบตัวอย่างในเครื่อง';
+        } else if (state.geminiStatus === 'connected' && hasToken) {
+          dom.globalStatusPill.setAttribute('data-state', 'connected');
+          dom.globalStatusText.textContent = 'GEMINI CONNECTED';
+          dom.chatConnectionBadge.setAttribute('data-state', 'connected');
+          dom.chatConnectionText.textContent = 'GEMINI CONNECTED · เชื่อมต่อสำเร็จ';
+        } else if (state.geminiStatus === 'busy') {
+          dom.globalStatusPill.setAttribute('data-state', 'demo');
+          dom.globalStatusText.textContent = 'GEMINI BUSY';
+          dom.chatConnectionBadge.setAttribute('data-state', 'demo');
+          dom.chatConnectionText.textContent = 'เซิร์ฟเวอร์ Gemini หนาแน่นชั่วคราว · โทเคนปกติ';
+        } else if (state.geminiStatus === 'offline') {
+          dom.globalStatusPill.setAttribute('data-state', 'offline');
+          dom.globalStatusText.textContent = 'GEMINI ERROR';
+          dom.chatConnectionBadge.setAttribute('data-state', 'offline');
+          dom.chatConnectionText.textContent = 'เชื่อมต่อ Gemini ไม่สำเร็จ · ตรวจสอบโทเคน';
+        } else if (hasToken) {
+          dom.globalStatusPill.setAttribute('data-state', 'connected');
+          dom.globalStatusText.textContent = 'GEMINI READY';
+          dom.chatConnectionBadge.setAttribute('data-state', 'connected');
+          dom.chatConnectionText.textContent = 'GEMINI READY · โทเคนถาวรพร้อมใช้งาน';
+        } else {
+          dom.globalStatusPill.setAttribute('data-state', 'demo');
+          dom.globalStatusText.textContent = 'GEMINI MODE';
+          dom.chatConnectionBadge.setAttribute('data-state', 'demo');
+          dom.chatConnectionText.textContent = 'GEMINI MODE · กรุณาใส่ API Token';
+        }
+      }
+
+      function setChatMode(mode) {
+        state.chatMode = mode === 'demo' ? 'demo' : 'gemini';
+        const isGem = state.chatMode === 'gemini';
+        dom.modeDemoBtn.setAttribute('aria-pressed', String(!isGem));
+        dom.modeGeminiBtn.setAttribute('aria-pressed', String(isGem));
+        dom.geminiTokenBar.hidden = !isGem;
+        dom.chatErrorBox.hidden = true;
+        updateGlobalAndChatBadges();
+      }
+
+      function toggleTokenVisibility() {
+        state.tokenVisible = !state.tokenVisible;
+        dom.geminiTokenInput.type = state.tokenVisible ? 'text' : 'password';
+        dom.toggleTokenVisBtn.setAttribute('aria-pressed', String(state.tokenVisible));
+        dom.toggleTokenVisBtn.textContent = state.tokenVisible ? 'ซ่อน' : 'แสดง';
+      }
+
+      function restoreDefaultToken() {
+        state.geminiApiKey = DEFAULT_GEMINI_TOKEN;
+        dom.geminiTokenInput.value = DEFAULT_GEMINI_TOKEN;
+        if (state.geminiStatus === 'offline') {
+          state.geminiStatus = 'unknown';
+        }
+        dom.chatErrorBox.hidden = true;
+        updateGlobalAndChatBadges();
+      }
+
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      }
+
+      function formatMarkdownLite(text) {
+        const lines = escapeHtml(text).split('\n');
+        let html = '';
+        let inList = false;
+
+        for (let i = 0; i < lines.length; i++) {
+          let trimmed = lines[i].trim();
+          if (/^#{1,4}\s+/.test(trimmed)) {
+            trimmed = '**' + trimmed.replace(/^#{1,4}\s+/, '') + '**';
+          }
+          const boldFormatted = trimmed.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+
+          if (boldFormatted.startsWith('- ') || boldFormatted.startsWith('* ')) {
+            if (!inList) {
+              html += '<ul>';
+              inList = true;
+            }
+            html += '<li>' + boldFormatted.slice(2) + '</li>';
+          } else {
+            if (inList) {
+              html += '</ul>';
+              inList = false;
+            }
+            if (boldFormatted.length > 0) {
+              html += '<p>' + boldFormatted + '</p>';
+            }
+          }
+        }
+        if (inList) html += '</ul>';
+        return html || '<p></p>';
+      }
+
+      function renderChatMessage(role, text, meta) {
+        const opts = meta || {};
+        const row = document.createElement('div');
+        row.className = 'msg-row ' + (role === 'user' ? 'user' : 'assistant');
+
+        const metaEl = document.createElement('div');
+        metaEl.className = 'msg-meta';
+
+        if (role === 'user') {
+          metaEl.textContent = 'คุณ';
+        } else {
+          const labelSpan = document.createElement('span');
+          labelSpan.textContent = 'SATTHA AI';
+          metaEl.appendChild(labelSpan);
+
+          if (opts.isDemo) {
+            const tag = document.createElement('span');
+            tag.className = 'demo-tag';
+            tag.textContent = 'DEMO SAMPLE · คำตอบตัวอย่าง';
+            metaEl.appendChild(tag);
+          } else if (opts.isGemini) {
+            const tag = document.createElement('span');
+            tag.className = 'demo-tag';
+            tag.style.color = 'var(--accent-main)';
+            tag.style.borderColor = 'rgba(169, 199, 201, 0.35)';
+            tag.style.background = 'rgba(169, 199, 201, 0.08)';
+            tag.textContent = 'GEMINI API';
+            metaEl.appendChild(tag);
+          }
+        }
+
+        const bubble = document.createElement('div');
+        bubble.className = 'msg-bubble';
+        if (role === 'user') {
+          bubble.textContent = text;
+        } else {
+          bubble.innerHTML = formatMarkdownLite(text);
+        }
+
+        row.appendChild(metaEl);
+        row.appendChild(bubble);
+        dom.chatMessages.appendChild(row);
+        dom.chatMessages.scrollTop = dom.chatMessages.scrollHeight;
+        return row;
+      }
+
+      function addWelcomeMessage() {
+        dom.chatMessages.innerHTML = '';
+        state.chatHistory = [];
+        renderChatMessage(
+          'assistant',
+          'สวัสดีครับ ยินดีต้อนรับสู่ **SATTHA AI** พื้นที่สนทนาเรื่องศาสนาเปรียบเทียบ ปรัชญา ประวัติศาสตร์ โบราณคดี จิตวิทยา และวิทยาศาสตร์แบบตรงไปตรงมาและเป็นกันเอง\n\n' +
+          'ระบบได้ฝัง **Gemini API Token ถาวร** และเปิดโหมด **Gemini** ไว้ให้พร้อมใช้งานทันที คุณสามารถพิมพ์คำถามหรือคลิกหัวข้อแนะนำด้านบนเพื่อเริ่มสนทนาได้เลยครับ',
+          { isGemini: state.chatMode === 'gemini', isDemo: state.chatMode === 'demo' }
+        );
+      }
+
+      function pickDemoReply(userText) {
+        const normalized = userText.toLowerCase();
+        for (let i = 0; i < DEMO_RESPONSES.length; i++) {
+          const item = DEMO_RESPONSES[i];
+          if (item.match.some(function (kw) { return normalized.includes(kw.toLowerCase()); })) {
+            return item.reply;
+          }
+        }
+        return GENERIC_DEMO_FALLBACK;
+      }
+
+      function waitMs(ms) {
+        return new Promise(function (resolve) { setTimeout(resolve, ms); });
+      }
+
+      async function requestGeminiCompletion(apiKey, userMessage, onStatusUpdate) {
+        const endpoint = 'about:invalid#zPythonSafez';
+
+        const recentTurns = state.chatHistory.slice(-14).map(function (turn) {
+          return {
+            role: turn.role === 'user' ? 'user' : 'model',
+            parts: [{ text: turn.text }]
+          };
+        });
+        recentTurns.push({
+          role: 'user',
+          parts: [{ text: userMessage.slice(0, 1500) }]
+        });
+
+        const primaryPayload = {
+          system_instruction: {
+            parts: [{ text: SATTHA_SYSTEM_INSTRUCTION }]
+          },
+          contents: recentTurns,
+          generationConfig: {
+            temperature: 0.7,
+            maxOutputTokens: 1600
+          }
+        };
+
+        const retryDelays = [1500, 3000, 5000];
+        let useFallbackSchema = false;
+
+        for (let attempt = 0; attempt <= retryDelays.length; attempt++) {
+          const payloadToSend = useFallbackSchema
+            ? {
+                contents: [
+                  { role: 'user', parts: [{ text: SATTHA_SYSTEM_INSTRUCTION }] },
+                  { role: 'model', parts: [{ text: 'รับทราบครับ พร้อมสนทนาในบทบาท SATTHA AI ครับ' }] }
+                ].concat(recentTurns)
+              }
+            : primaryPayload;
+
+          let response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-goog-api-key': apiKey
+            },
+            body: JSON.stringify(payloadToSend)
+          });
+
+          let data = null;
+          try {
+            data = await response.json();
+          } catch (_) {
+            data = null;
+          }
+
+          if (
+            !useFallbackSchema &&
+            response.status === 400 &&
+            data &&
+            data.error &&
+            /system_instruction|Unknown name/i.test(data.error.message || '')
+          ) {
+            useFallbackSchema = true;
+            attempt--;
+            continue;
+          }
+
+          const rawErrMsg = data && data.error && data.error.message ? data.error.message : '';
+          const isHighDemand =
+            response.status === 503 ||
+            response.status === 502 ||
+            response.status === 504 ||
+            /high demand|overloaded|UNAVAILABLE|temporarily unavailable/i.test(rawErrMsg);
+
+          if (!response.ok) {
+            if (isHighDemand && attempt < retryDelays.length) {
+              const nextTry = attempt + 1;
+              if (typeof onStatusUpdate === 'function') {
+                onStatusUpdate(
+                  'เซิร์ฟเวอร์ Gemini มีผู้ใช้งานหนาแน่นชั่วคราว กำลังลองส่งใหม่อัตโนมัติ (ครั้งที่ ' +
+                  nextTry + '/' + retryDelays.length + ')...'
+                );
+              }
+              await waitMs(retryDelays[attempt]);
+              continue;
+            }
+
+            if (isHighDemand) {
+              const busyErr = new Error(
+                'ขณะนี้โมเดล Gemini (gemini-flash-latest) มีผู้ใช้งานหนาแน่นชั่วคราว (503 High Demand) โดย API Token ของคุณใช้งานได้ปกติ กรุณารอสัก 10–30 วินาทีแล้วกด "ลองส่งอีกครั้ง"'
+              );
+              busyErr.isBusy = true;
+              throw busyErr;
+            }
+
+            if (response.status === 400 || response.status === 401 || response.status === 403) {
+              if (/api_key|key not valid|permission|unauthenticated|API key/i.test(rawErrMsg) || response.status !== 400) {
+                throw new Error('Gemini API Token ไม่ถูกต้องหรือไม่มีสิทธิ์ใช้งาน (' + (rawErrMsg || response.status) + ')');
+              }
+              throw new Error(rawErrMsg || 'คำขอไม่ถูกต้อง (' + response.status + ')');
+            }
+
+            if (response.status === 429) {
+              const rateErr = new Error('เรียกใช้งานเกินโควตาชั่วคราว (Quota / Rate Limit 429) กรุณารอสักครู่แล้วลองใหม่');
+              rateErr.isBusy = true;
+              throw rateErr;
+            }
+
+            throw new Error(rawErrMsg || ('เซิร์ฟเวอร์ Gemini ตอบกลับด้วยสถานะ ' + response.status));
+          }
+
+          const parts =
+            data &&
+            data.candidates &&
+            data.candidates[0] &&
+            data.candidates[0].content &&
+            data.candidates[0].content.parts;
+
+          if (!Array.isArray(parts) || parts.length === 0) {
+            throw new Error('ไม่ได้รับข้อความตอบกลับจากโมเดล Gemini (เนื้อหาอาจถูกกรองหรือว่างเปล่า)');
+          }
+
+          const replyText = parts
+            .map(function (p) { return p.text || ''; })
+            .join('')
+            .trim();
+
+          if (!replyText) {
+            throw new Error('ข้อความตอบกลับจาก Gemini ว่างเปล่า');
+          }
+
+          return replyText;
+        }
+
+        throw new Error('ไม่สามารถเชื่อมต่อบริการ Gemini API ได้');
+      }
+
+      async function sendChatMessage(rawText, options) {
+        const opts = options || {};
+        const text = String(rawText || '').trim();
+        if (!text) {
+          dom.chatInputFeedback.textContent = 'กรุณาพิมพ์ข้อความก่อนกดส่ง';
+          dom.chatInput.focus();
+          return;
+        }
+        if (state.isChatLoading) return;
+
+        // Always fall back to DEFAULT_GEMINI_TOKEN if input was accidentally cleared
+        const cleanToken = (state.geminiApiKey && state.geminiApiKey.trim())
+          ? state.geminiApiKey.trim()
+          : DEFAULT_GEMINI_TOKEN;
+
+        if (state.chatMode === 'gemini' && !state.geminiApiKey.trim()) {
+          state.geminiApiKey = DEFAULT_GEMINI_TOKEN;
+          dom.geminiTokenInput.value = DEFAULT_GEMINI_TOKEN;
+          updateGlobalAndChatBadges();
+        }
+
+        dom.chatInputFeedback.textContent = 'กด Enter เพื่อส่ง · Shift+Enter เพื่อขึ้นบรรทัดใหม่';
+        dom.chatErrorBox.hidden = true;
+        state.lastFailedMessage = '';
+
+        if (!opts.skipUserBubble) {
+          renderChatMessage('user', text);
+          dom.chatInput.value = '';
+        }
+
+        state.isChatLoading = true;
+        dom.sendChatBtn.disabled = true;
+        dom.sendChatBtn.textContent = 'กำลังคิด...';
+
+        const loadingRow = renderChatMessage('assistant', 'กำลังเรียบเรียงคำตอบ...', {});
+        const loadingBubble = loadingRow.querySelector('.msg-bubble');
+
+        if (state.chatMode === 'demo') {
+          setTimeout(function () {
+            if (loadingRow.parentNode) loadingRow.parentNode.removeChild(loadingRow);
+            const demoAnswer = pickDemoReply(text);
+            state.chatHistory.push({ role: 'user', text: text });
+            state.chatHistory.push({ role: 'model', text: demoAnswer });
+            state.lastFailedRenderedUser = false;
+            renderChatMessage('assistant', demoAnswer, { isDemo: true });
+            state.isChatLoading = false;
+            dom.sendChatBtn.disabled = false;
+            dom.sendChatBtn.textContent = 'ส่งข้อความ';
+          }, 320);
+          return;
+        }
+
+        try {
+          const reply = await requestGeminiCompletion(cleanToken, text, function (statusMsg) {
+            if (loadingBubble) {
+              loadingBubble.innerHTML = formatMarkdownLite(statusMsg);
+            }
+          });
+
+          if (loadingRow.parentNode) loadingRow.parentNode.removeChild(loadingRow);
+          state.geminiStatus = 'connected';
+          state.lastFailedRenderedUser = false;
+          state.chatHistory.push({ role: 'user', text: text });
+          state.chatHistory.push({ role: 'model', text: reply });
+          updateGlobalAndChatBadges();
+          renderChatMessage('assistant', reply, { isGemini: true });
+        } catch (err) {
+          if (loadingRow.parentNode) loadingRow.parentNode.removeChild(loadingRow);
+          state.geminiStatus = (err && err.isBusy) ? 'busy' : 'offline';
+          state.lastFailedMessage = text;
+          state.lastFailedRenderedUser = true;
+          updateGlobalAndChatBadges();
+
+          dom.chatErrorText.textContent =
+            'เรียกใช้งาน Gemini API ไม่สำเร็จ: ' +
+            (err && err.message ? err.message : 'เกิดข้อผิดพลาดในการเชื่อมต่อ') +
+            ' — คุณสามารถกดลองส่งอีกครั้ง หรือสลับไปใช้โหมด Demo ทันที';
+          dom.chatErrorBox.hidden = false;
+        } finally {
+          state.isChatLoading = false;
+          dom.sendChatBtn.disabled = false;
+          dom.sendChatBtn.textContent = 'ส่งข้อความ';
+        }
+      }
+
+      // =========================================================================
+      // UI Tabs, Navigation & Subtle Desktop Parallax
+      // =========================================================================
+      function switchStudioTab(tabName) {
+        state.activeTab = tabName === 'mic' ? 'mic' : 'file';
+        const isFile = state.activeTab === 'file';
+
+        dom.tabBtnFile.setAttribute('aria-selected', String(isFile));
+        dom.tabBtnMic.setAttribute('aria-selected', String(!isFile));
+        dom.tabPanelFile.hidden = !isFile;
+        dom.tabPanelMic.hidden = isFile;
+
+        if (!isFile) {
+          refreshInputDevices();
+        }
+        updateComparisonHeaders();
+        if (!state.visualizerRafId) drawComparisonSnapshot();
+      }
+
+      function setupNavigationAndParallax() {
+        document.querySelectorAll('[data-scroll-to]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            const targetId = btn.getAttribute('data-scroll-to');
+            const targetEl = document.getElementById(targetId);
+            if (targetEl) {
+              targetEl.scrollIntoView({ behavior: state.prefersReducedMotion ? 'auto' : 'smooth' });
+            }
+            if (dom.mobileNavPanel.classList.contains('open')) {
+              dom.mobileNavPanel.classList.remove('open');
+              dom.mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            }
+          });
+        });
+
+        dom.mobileMenuBtn.addEventListener('click', function () {
+          const isOpen = dom.mobileNavPanel.classList.toggle('open');
+          dom.mobileMenuBtn.setAttribute('aria-expanded', String(isOpen));
+        });
+
+        const heroEl = document.querySelector('.hero');
+        if (heroEl && dom.heroSoundOrb) {
+          heroEl.addEventListener('pointermove', function (e) {
+            if (state.prefersReducedMotion || window.innerWidth < 960) return;
+            const rect = heroEl.getBoundingClientRect();
+            const nx = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+            const ny = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+            const rotY = (nx * 6).toFixed(2);
+            const rotX = (-ny * 6).toFixed(2);
+            dom.heroSoundOrb.style.transform = 'rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg)';
+          });
+
+          heroEl.addEventListener('pointerleave', function () {
+            dom.heroSoundOrb.style.transform = 'rotateX(0deg) rotateY(0deg)';
+          });
+        }
+      }
+
+      // =========================================================================
+      // Main App Initialization
+      // =========================================================================
+      function initApp() {
+        cacheDom();
+
+        // Sync permanent token into DOM input & activate Gemini Mode by default
+        dom.geminiTokenInput.value = state.geminiApiKey;
+        setChatMode('gemini');
+
+        setupNavigationAndParallax();
+        updateComparisonHeaders();
+        drawComparisonSnapshot();
+        addWelcomeMessage();
+        updateGlobalAndChatBadges();
+
+        // Comparison Mode Selector Listeners
+        dom.compareModeBtns.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            setComparisonMode(btn.getAttribute('data-comp-mode'));
+          });
+        });
+
+        // Studio Tab Listeners
+        dom.tabBtnFile.addEventListener('click', function () { switchStudioTab('file'); });
+        dom.tabBtnMic.addEventListener('click', function () { switchStudioTab('mic'); });
+
+        // Audio File Upload & Drag-and-Drop
+        dom.browseFileBtn.addEventListener('click', function () {
+          dom.audioFileInput.click();
+        });
+
+        dom.audioFileInput.addEventListener('change', function (e) {
+          const file = e.target.files && e.target.files[0];
+          if (file) loadAudioFile(file);
+        });
+
+        ['dragenter', 'dragover'].forEach(function (evName) {
+          dom.fileDropzone.addEventListener(evName, function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            dom.fileDropzone.classList.add('drag-over');
+          });
+        });
+
+        ['dragleave', 'drop'].forEach(function (evName) {
+          dom.fileDropzone.addEventListener(evName, function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            dom.fileDropzone.classList.remove('drag-over');
+          });
+        });
+
+        dom.fileDropzone.addEventListener('drop', function (e) {
+          const file = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+          if (file) loadAudioFile(file);
+        });
+
+        // File Transport & Export
+        dom.playFileBtn.addEventListener('click', playFile);
+        dom.pauseFileBtn.addEventListener('click', pauseFile);
+        dom.stopFileBtn.addEventListener('click', stopFile);
+        dom.seekSlider.addEventListener('input', function (e) {
+          if (!state.audioBuffer) return;
+          const previewSec = (Number(e.target.value) / 1000) * state.audioBuffer.duration;
+          dom.elapsedTimeDisplay.textContent = formatSeconds(previewSec);
+          if (!state.isPlayingFile) {
+            state.fileOffset = previewSec;
+            if (state.comparisonMode === 'waveform') drawComparisonSnapshot();
+          }
+        });
+        dom.seekSlider.addEventListener('change', function (e) {
+          seekFile(e.target.value);
+        });
+        dom.exportWavBtn.addEventListener('click', exportProcessedFile);
+
+        // Live Microphone Controls
+        dom.refreshDevicesBtn.addEventListener('click', refreshInputDevices);
+        dom.micDeviceSelect.addEventListener('change', function (e) {
+          selectInputDevice(e.target.value);
+        });
+        dom.startMicBtn.addEventListener('click', startMicrophone);
+        dom.stopMicBtn.addEventListener('click', function () { stopMicrophone(false); });
+        dom.startRecBtn.addEventListener('click', startLiveRecording);
+        dom.stopRecBtn.addEventListener('click', stopLiveRecording);
+        dom.downloadRecBtn.addEventListener('click', downloadRecordedLiveMix);
+
+        if (navigator.mediaDevices && typeof navigator.mediaDevices.addEventListener === 'function') {
+          navigator.mediaDevices.addEventListener('devicechange', refreshInputDevices);
+        }
+
+        // Mixer & Presets
+        dom.sourceVolSlider.addEventListener('input', function (e) { setSourceVolume(e.target.value); });
+        dom.ambienceToggleBtn.addEventListener('click', toggleAmbienceLayer);
+        dom.ambienceVolSlider.addEventListener('input', function (e) { setAmbienceVolume(e.target.value); });
+        dom.masterVolSlider.addEventListener('input', function (e) { setMasterVolume(e.target.value); });
+        dom.muteMasterBtn.addEventListener('click', toggleMasterMute);
+
+        dom.presetCards.forEach(function (card) {
+          card.addEventListener('click', function () {
+            setSoundPreset(card.getAttribute('data-preset'));
+          });
+        });
+
+        // Resonant Breath Controls
+        dom.breathPaceSlider.addEventListener('input', function (e) {
+          const val = Number(e.target.value);
+          state.breathCycleSec = val;
+          dom.breathPaceVal.textContent = val + ' วินาที/รอบ';
+          if (state.ambienceEnabled && state.currentPreset === 'breath' && state.ambienceNodes) {
+            state.ambienceNodes.lfo.frequency.setTargetAtTime(1 / val, state.audioCtx.currentTime, 0.1);
+          }
+          if (!state.visualizerRafId && state.comparisonMode === 'waveform') {
+            drawComparisonSnapshot();
+          }
+        });
+
+        dom.breathPauseBtn.addEventListener('click', function () {
+          state.breathPaused = !state.breathPaused;
+          dom.breathPauseBtn.textContent = state.breathPaused
+            ? 'เริ่มไกด์หายใจต่อ (Resume Guide)'
+            : 'พักไกด์หายใจ (Pause Guide)';
+          if (state.breathPaused) {
+            dom.breathPhaseText.textContent = 'พักจังหวะหายใจชั่วคราว';
+          }
+        });
+
+        // Chat Companion Listeners
+        dom.modeDemoBtn.addEventListener('click', function () { setChatMode('demo'); });
+        dom.modeGeminiBtn.addEventListener('click', function () { setChatMode('gemini'); });
+
+        dom.geminiTokenInput.addEventListener('input', function (e) {
+          state.geminiApiKey = e.target.value;
+          if (state.geminiStatus === 'offline') {
+            state.geminiStatus = 'unknown';
+          }
+          if (state.geminiApiKey.trim()) {
+            dom.chatErrorBox.hidden = true;
+          }
+          updateGlobalAndChatBadges();
+        });
+
+        dom.geminiTokenInput.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            dom.chatInput.focus();
+          }
+        });
+
+        dom.toggleTokenVisBtn.addEventListener('click', toggleTokenVisibility);
+        dom.restoreDefaultTokenBtn.addEventListener('click', restoreDefaultToken);
+
+        dom.clearChatBtn.addEventListener('click', function () {
+          dom.chatErrorBox.hidden = true;
+          addWelcomeMessage();
+        });
+
+        dom.promptChips.forEach(function (chip) {
+          chip.addEventListener('click', function () {
+            const prompt = chip.getAttribute('data-prompt');
+            sendChatMessage(prompt);
+          });
+        });
+
+        dom.chatForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          sendChatMessage(dom.chatInput.value);
+        });
+
+        dom.chatInput.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendChatMessage(dom.chatInput.value);
+          }
+        });
+
+        dom.retryChatBtn.addEventListener('click', function () {
+          if (state.lastFailedMessage) {
+            const msg = state.lastFailedMessage;
+            const skipBubble = state.lastFailedRenderedUser;
+            dom.chatErrorBox.hidden = true;
+            sendChatMessage(msg, { skipUserBubble: skipBubble });
+          }
+        });
+
+        dom.fallbackDemoBtn.addEventListener('click', function () {
+          const pending = state.lastFailedMessage;
+          const skipBubble = state.lastFailedRenderedUser;
+          setChatMode('demo');
+          if (pending) {
+            sendChatMessage(pending, { skipUserBubble: skipBubble });
+          }
+        });
+
+        // Visibility, Resize & Reduced Motion Listeners
+        document.addEventListener('visibilitychange', function () {
+          ensureVisualizerLoop();
+        });
+
+        window.addEventListener('resize', function () {
+          if (!state.visualizerRafId) {
+            drawComparisonSnapshot();
+          }
+        });
+
+        if (window.matchMedia) {
+          const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+          if (typeof mq.addEventListener === 'function') {
+            mq.addEventListener('change', function (e) {
+              state.prefersReducedMotion = e.matches;
+              ensureVisualizerLoop();
+            });
+          }
+        }
+
+        // Clean up microphone & object URLs on page unload
+        window.addEventListener('pagehide', function () {
+          stopMicrophone(true);
+          if (state.fileObjectUrl) {
+            URL.revokeObjectURL(state.fileObjectUrl);
+            state.fileObjectUrl = null;
+          }
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initApp);
+      } else {
+        initApp();
+      }
+    })();
+  </script>
+</body>
+</html>
