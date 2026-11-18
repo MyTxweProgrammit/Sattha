@@ -4717,7 +4717,7 @@
       }
 
       async function requestGeminiCompletion(apiKey, userMessage, onStatusUpdate) {
-        const endpoint = 'about:invalid#zPythonSafez';
+        const endpoint = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent';
 
         const recentTurns = state.chatHistory.slice(-14).map(function (turn) {
           return {
