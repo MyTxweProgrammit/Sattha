@@ -4737,7 +4737,8 @@
           contents: recentTurns,
           generationConfig: {
             temperature: 0.7,
-            maxOutputTokens: 1600
+            maxOutputTokens: 1600,
+            thinkingConfig: { thinkingBudget: 0 }
           }
         };
 
@@ -4754,22 +4755,39 @@
               }
             : primaryPayload;
 
-          let response = await fetch(endpoint, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'X-goog-api-key': apiKey
-            },
-            body: JSON.stringify(payloadToSend)
-          });
-
+          const controller = new AbortController();
+          const timeoutTimer = setTimeout(function () { controller.abort(); }, 30000);
+          let response;
           let data = null;
           try {
-            data = await response.json();
-          } catch (_) {
-            data = null;
+            response = await fetch(endpoint, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'X-goog-api-key': apiKey },
+              body: JSON.stringify(payloadToSend),
+              signal: controller.signal
+            });
+            try { data = await response.json(); } catch (_) { data = null; }
+          } catch (netErr) {
+            if (netErr && netErr.name === 'AbortError') {
+              const timeoutErr = new Error('Gemini ตอบกลับช้าเกิน 30 วินาที กรุณาตรวจสอบอินเทอร์เน็ตแล้วกดลองส่งอีกครั้ง');
+              timeoutErr.isBusy = true;
+              throw timeoutErr;
+            }
+            throw netErr;
+          } finally {
+            clearTimeout(timeoutTimer);
           }
-
+          
+          if (
+            primaryPayload.generationConfig.thinkingConfig &&
+            response.status === 400 &&
+            data && data.error &&
+            /thinking/i.test(data.error.message || '')
+          ) {
+            delete primaryPayload.generationConfig.thinkingConfig;
+            attempt--;
+            continue;
+          }
           if (
             !useFallbackSchema &&
             response.status === 400 &&
