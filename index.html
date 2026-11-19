@@ -2223,7 +2223,7 @@
             </div>
             <div class="token-meta-row">
               <span>ฝังโทเคนถาวรไว้ในระบบแล้ว เปิดใช้งานโหมด Gemini ทันทีโดยไม่ต้องวางใหม่ทุกครั้ง</span>
-              <span class="token-endpoint-tag">Model: gemini-flash-latest · Header: X-goog-api-key</span>
+              <span class="token-endpoint-tag">Model: gemini-3.5-flash-lite · Header: X-goog-api-key</span>
             </div>
           </div>
 
@@ -4717,7 +4717,7 @@
       }
 
       async function requestGeminiCompletion(apiKey, userMessage, onStatusUpdate) {
-        const endpoint = 'https://generativelanguage.googleapis.com/v1beta/interactions';
+        const endpoint = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent';
 
         const recentTurns = state.chatHistory.slice(-14).map(function (turn) {
           return {
