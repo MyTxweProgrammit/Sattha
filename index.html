@@ -4717,7 +4717,7 @@
       }
 
       async function requestGeminiCompletion(apiKey, userMessage, onStatusUpdate) {
-        const endpoint = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent';
+        const endpoint = 'https://generativelanguage.googleapis.com/v1beta/interactions';
 
         const recentTurns = state.chatHistory.slice(-14).map(function (turn) {
           return {
